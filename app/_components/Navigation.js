@@ -1,11 +1,22 @@
 'use client';
 
-import Link from 'next/link';
 import { Sling as Hamburger } from 'hamburger-react';
-import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
+    return () => {
+      document.body.classList.remove('overflow-hidden');
+    };
+  }, [isOpen]);
 
   return (
     <nav>
@@ -36,7 +47,7 @@ function Navigation() {
                   Agents
                 </Link>
                 <Link
-                  className='px-4 py-2 bg-primary-navy text-primary-lightGray rounded-xl'
+                  className='px-4 py-2 bg-primary-navy text-primary-lightGray rounded-lg'
                   href='/signin'
                 >
                   Sign In
@@ -50,7 +61,7 @@ function Navigation() {
       {/* Mobile Menu */}
 
       <div className={`sm:hidden ${isOpen ? 'block' : 'hidden'}`}>
-        <div className='px-2 py-2 gap-3 w-4/6 h-dvh right-0 top-0  flex flex-col absolute pt-[72px] bg-primary-lightGray drop-shadow-lg'>
+        <div className='px-2 py-2 gap-3 w-4/6 h-dvh right-0 top-0  flex flex-col absolute pt-[72px] bg-primary-lightGray drop-shadow-lg z-10'>
           <Link className='border-y pb-2 pt-4 text-lg' href='/buy'>
             Buy
           </Link>
