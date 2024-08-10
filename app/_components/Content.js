@@ -1,6 +1,6 @@
 function Content() {
   return (
-    <div className='mt-20  flex flex-col gap-3  md:max-w-6xl lg:mx-auto items-center '>
+    <div className='py-12  flex flex-col gap-3  md:max-w-6xl lg:mx-auto items-center '>
       <h1 className='text-5xl font-semibold text-primary-darkGray leading-tight text-center px-3'>
         Why HomeFinder Stands Out
       </h1>
@@ -8,7 +8,7 @@ function Content() {
         Our platform has successfully connected thousands of buyers with their
         dream homes. See why Home Quest is trusted by so many.
       </p>
-      <div className='my-5 border border-gray-200 rounded-lg shadow-md flex flex-col md:flex-row w-full items-center divide-y-2 divide-gray-200 md:divide-y-0 md:divide-x-2 '>
+      <div className='my-5 border border-gray-200 rounded-lg boxShadow flex flex-col md:flex-row w-full items-center divide-y-2 divide-gray-200 md:divide-y-0 md:divide-x-2 '>
         <div className='flex flex-col items-center w-full py-4 '>
           <h1 className='text-3xl font-semibold text-primary-darkGray'>
             5,000
