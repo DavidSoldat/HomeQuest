@@ -7,7 +7,7 @@ Property Listings: Detailed listings with images, descriptions, and key property
 Advanced Search & Filters: Find properties based on location, price, etc.\
 Real-Time Messaging: Connect with sellers or agents directly through the platform.\
 Payment Integration: Secure payments for property-related transactions.\
-Responsive Design: Optimized for both desktop and mobile devices.\
+Responsive Design: Optimized for both desktop and mobile devices.
 
 Tech Stack:\
 \
