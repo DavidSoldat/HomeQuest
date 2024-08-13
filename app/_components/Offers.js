@@ -30,7 +30,7 @@ function Offers() {
             Get instant notifications on new listings that match your
             preferences. Never miss out on your dream home.
           </span>
-          <div className='mb-5 px-4 py-2 bg-primary-navy text-primary-lightGray rounded-lg'>
+          <div className='mb-5 px-4 py-2 text-white bg-blue-700 hover:bg-blue-800  rounded-lg'>
             <Link href='/'>Learn More</Link>
           </div>
         </div>
@@ -43,7 +43,7 @@ function Offers() {
             Access exclusive listings that are not available on other platforms.
             Find hidden gems in your market.
           </span>
-          <div className='mb-5 px-4 py-2 bg-primary-navy text-primary-lightGray rounded-lg'>
+          <div className='mb-5 px-4 py-2 text-white bg-blue-700 hover:bg-blue-800  rounded-lg'>
             <Link href='/'>Learn More</Link>
           </div>
         </div>
@@ -56,7 +56,7 @@ function Offers() {
             Stay informed with the latest real estate trends and data to make
             well-informed buying and selling decisions.
           </span>
-          <div className='mb-5 px-4 py-2 bg-primary-navy text-primary-lightGray rounded-lg'>
+          <div className='mb-5 px-4 py-2 text-white bg-blue-700 hover:bg-blue-800  rounded-lg'>
             <Link href='/'>Learn More</Link>
           </div>
         </div>

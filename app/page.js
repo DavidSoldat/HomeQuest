@@ -4,9 +4,9 @@ import Features from './_components/Features';
 import Hero from './_components/Hero';
 import Offers from './_components/Offers';
 
-export default function Home() {
+export default async function Home() {
   return (
-    <main>
+    <main className='w-full'>
       <Hero />
       <Content />
       <Features />
