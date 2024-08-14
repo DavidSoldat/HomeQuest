@@ -1,7 +1,7 @@
 import '@/app/_styles/globals.css';
-import Header from './_components/Header';
-import Footer from './_components/Footer';
 import { Inter } from 'next/font/google';
+import Footer from './_components/Footer';
+import Header from './_components/Header';
 
 const inter = Inter({ subsets: ['latin'], display: 'swap' });
 
@@ -14,19 +14,6 @@ export const metadata = {
     'Find your perfect home with HomeQuest. Explore diverse property listings, manage your real estate portfolio, and connect with buyers, sellers, and agents.',
 };
 
-// export default function RootLayout({ children }) {
-//   return (
-//     <html lang='en'>
-//       <body className={`${inter.className} min-h-screen flex flex-col`}>
-//         <Header />
-//         <div className='flex-1'>
-//           <main className='w-full mx-0'>{children}</main>
-//         </div>
-//         <Footer />
-//       </body>
-//     </html>
-//   );
-// }
 export default function RootLayout({ children }) {
   return (
     <html lang='en'>

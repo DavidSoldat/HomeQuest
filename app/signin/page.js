@@ -1,13 +1,15 @@
 'use client';
-import Image from 'next/image';
 import { useState } from 'react';
+import { useActionState } from 'react';
 import SignInButton from '../_components/SignInButton';
+import { signup } from '../_utils/auth';
 
 function SignIn() {
   const [signIn, setSignIn] = useState(true);
+  const [state, action, pending] = useActionState(signup, undefined);
 
   return (
-    <div className='w-full my-36 flex flex-col items-center justify-center'>
+    <div className='w-full my-20 md:my-36 flex flex-col items-center justify-center'>
       <div className='border border-gray-200 rounded-lg flex flex-col items-start px-9 w-5/6 py-12 boxShadow sm:max-w-md lg:mx-auto '>
         <h1 className='text-primary-navy font-bold text-2xl self-center '>
           Welcome to Home Quest
@@ -32,7 +34,7 @@ function SignIn() {
         </div>
         <div className='w-full pb-7 border-b'>
           {signIn ? (
-            <form className='w-full  mx-auto'>
+            <form className='w-full  mx-auto' action=''>
               <div className='mb-5'>
                 <label
                   htmlFor='email'
@@ -48,6 +50,7 @@ function SignIn() {
                   required
                 />
               </div>
+              {state.errors.name && <p>{state.errors.name}</p>}
               <div className='mb-5'>
                 <label
                   htmlFor='password'
@@ -63,7 +66,7 @@ function SignIn() {
                   required
                 />
               </div>
-
+              {state.errors.name && <p>{state.errors.name}</p>}
               <button
                 type='submit'
                 className='text-white bg-blue-700 hover:bg-blue-800  font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center'
@@ -72,7 +75,7 @@ function SignIn() {
               </button>
             </form>
           ) : (
-            <form className='w-full  mx-auto'>
+            <form className='w-full  mx-auto' action=''>
               <div className='mb-5'>
                 <label
                   htmlFor='email'
@@ -88,6 +91,7 @@ function SignIn() {
                   required
                 />
               </div>
+              {state.errors.name && <p>{state.errors.name}</p>}
               <div className='mb-5'>
                 <label
                   htmlFor='password'
@@ -114,10 +118,12 @@ function SignIn() {
                     At least 1 lowercase letter and 1 uppercase letter
                   </p>
                 </div>
+                {state.errors.name && <p>{state.errors.name}</p>}
               </div>
 
               <button
                 type='submit'
+                disabled={pending}
                 className='text-white bg-blue-700 hover:bg-blue-800  font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center'
               >
                 Register
@@ -127,18 +133,10 @@ function SignIn() {
         </div>
         <div className='mt-4 w-full flex flex-col'>
           <h2 className='self-center'>Or connect with:</h2>
-          <form action='' className='my-4 flex flex-col gap-3'>
+          <div className='my-4 flex flex-col gap-3'>
             <SignInButton provider={'google'} />
-            <button className='px-4 py-3 text-center text-primary-navy  border border-gray-200 hover:bg-blue-50 hover:border-blue-300 rounded-lg flex gap-3 items-center justify-center w-full'>
-              <Image
-                src='https://authjs.dev/img/providers/facebook.svg'
-                alt='Google logo'
-                height='20'
-                width='20'
-              />
-              <span className='font-semibold '>Continue with Facebook</span>
-            </button>
-          </form>
+            <SignInButton provider={'facebook'} />
+          </div>
         </div>
       </div>
     </div>
