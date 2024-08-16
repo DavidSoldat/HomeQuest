@@ -14,6 +14,7 @@ Tech Stack:\
 Frontend: Next.js, TailwindCSS\
 Backend: Next.js API Routes\
 Database: Vercel Postgres\
+Storage: Firebase Cloud Storage
 Authentication: NextAuth\
 Payment Processing: Stripe\
 State Management: Context API\
