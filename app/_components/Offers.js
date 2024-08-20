@@ -1,12 +1,5 @@
+import { ClockIcon, CloudIcon, FireIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import {
-  BellIcon,
-  BriefcaseIcon,
-  ClockIcon,
-  CloudIcon,
-  EnvelopeIcon,
-  FireIcon,
-} from '@heroicons/react/24/outline';
 
 function Offers() {
   return (
