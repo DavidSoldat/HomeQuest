@@ -1,14 +1,14 @@
-import { auth } from '@/auth';
 import Link from 'next/link';
+import getSession from '../_lib/getSession';
 import UserButton from './UserButton';
 
 export default async function Navigation() {
-  const session = await auth();
+  const session = await getSession();
   const user = session?.user;
 
   return (
     <nav>
-      <div className='mx-auto lg:px-8'>
+      <div className='mx-auto '>
         <div className='relative flex items-center justify-between h-16'>
           <div className='hidden sm:block sm:ml-6'>
             <div className='flex items-center'>

@@ -19,3 +19,14 @@ export const RegisterFormSchema = z.object({
     })
     .trim(),
 });
+
+export const LoginFormSchema = z.object({
+  email: z.string().email({ message: 'Please enter a valid email' }).trim(),
+  password: z.string().min(8, { message: 'At least 8 characters' }).trim(),
+});
+
+export const updateProfileSchema = z.object({
+  name: z
+    .string()
+    .min(2, { message: 'Name must be at least 2 characters long' }),
+});

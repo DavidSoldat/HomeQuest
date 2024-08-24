@@ -7,7 +7,7 @@ function NotFound() {
     <div className='w-full  flex flex-col items-center justify-center gap-4'>
       <div className='flex justify-center flex-col items-center'>
         <h1 className='text-center font-semibold text-lg max-w-fit'>
-          Not Found
+          Oops.. Not Found
         </h1>
         <p>Could not find requested resource</p>
       </div>

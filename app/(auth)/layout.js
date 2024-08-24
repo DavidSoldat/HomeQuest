@@ -32,7 +32,7 @@ export default function LayoutForms({ children }) {
             New account
           </Link>
         </div>
-        <div className='w-full pb-7 border-b'>{children}</div>
+        <div className='w-full'>{children}</div>
       </div>
     </div>
   );

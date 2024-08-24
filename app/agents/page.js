@@ -1,5 +1,9 @@
 import Link from 'next/link';
 
+export const metadata = {
+  title: 'Agents',
+};
+
 function Agents() {
   return (
     <div className='w-full h-screen md:max-w-6xl lg:mx-auto px-4 py-4 flex flex-col items-center  relative gap-5'>
@@ -12,7 +16,7 @@ function Agents() {
       </p>
       <div className='grid grid-cols-2 grid-rows-* gap-4 bg-blue-200 w-full'>
         <div className='flex'>
-          <Link href='/'>
+          <Link href='/' className='bg-red-50'>
             <div>image</div>
             <div>text</div>
           </Link>
