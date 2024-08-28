@@ -16,5 +16,4 @@ Backend: Next.js API Routes\
 Database: Vercel Postgres\
 Storage: Firebase Cloud Storage\
 Authentication: NextAuth\
-State Management: Context API\
 Hosting: Vercel
