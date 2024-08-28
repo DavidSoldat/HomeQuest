@@ -2,7 +2,7 @@ import { PrismaAdapter } from '@auth/prisma-adapter';
 import NextAuth from 'next-auth';
 import GitHub from 'next-auth/providers/github';
 import Google from 'next-auth/providers/google';
-import Resend from 'next-auth/providers/resend';
+import Sendgrid from 'next-auth/providers/sendgrid';
 import prisma from './app/_lib/prisma';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -20,12 +20,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Google,
     GitHub,
-    Resend({
-      from: 'no-reply@tutorial.codinginflow.com',
+    Sendgrid({
+      from: 'homequestrealestates@gmail.com',
     }),
   ],
   pages: {
     signIn: '/signin',
-    
   },
 });

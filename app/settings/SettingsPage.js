@@ -18,8 +18,6 @@ import { updateProfile } from '../_lib/actions';
 import { useSession } from 'next-auth/react';
 
 export default function SettingsPage({ user }) {
-  const { toast } = useToast();
-
   const session = useSession();
 
   const form = useForm({

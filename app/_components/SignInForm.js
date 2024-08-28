@@ -12,6 +12,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Button } from '../_components/Button';
 import { LoginFormSchema } from '../_lib/validations';
+import { signIn } from '@/auth';
+import { signInSendgrid } from '../_lib/actions';
 
 export default function SignInForm() {
   const form = useForm({
@@ -22,7 +24,7 @@ export default function SignInForm() {
 
   async function onSubmit(data) {
     try {
-      await updateProfile(data);
+      await signInSendgrid(data);
     } catch (error) {
       console.log(error);
     }
