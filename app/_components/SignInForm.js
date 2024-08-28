@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import {
   Form,
   FormControl,
@@ -6,32 +6,25 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Button } from "../_components/Button";
-import { LoginFormSchema } from "../_lib/validations";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { Button } from '../_components/Button';
+import { LoginFormSchema } from '../_lib/validations';
 
 export default function SignInForm() {
-  const { toast } = useToast();
-
   const form = useForm({
     resolver: zodResolver(LoginFormSchema),
     // TODO: Add default value from current user
-    defaultValues: { email: "" },
+    defaultValues: { email: '' },
   });
 
   async function onSubmit(data) {
     try {
       await updateProfile(data);
-      toast({ description: "Logged in" });
     } catch (error) {
-      toast({
-        variant: "destructive",
-        description: "An error occurred. Please try again.",
-      });
+      console.log(error);
     }
   }
 
