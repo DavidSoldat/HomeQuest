@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import {
   Form,
   FormControl,
@@ -6,13 +6,13 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { useToast } from '@/components/ui/use-toast';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { Button } from '../_components/Button';
-import { LoginFormSchema } from '../_lib/validations';
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { Button } from "../_components/Button";
+import { LoginFormSchema } from "../_lib/validations";
 
 export default function SignInForm() {
   const { toast } = useToast();
@@ -20,17 +20,17 @@ export default function SignInForm() {
   const form = useForm({
     resolver: zodResolver(LoginFormSchema),
     // TODO: Add default value from current user
-    defaultValues: { email: '', password: '' },
+    defaultValues: { email: "" },
   });
 
   async function onSubmit(data) {
     try {
       await updateProfile(data);
-      toast({ description: 'Logged in' });
+      toast({ description: "Logged in" });
     } catch (error) {
       toast({
-        variant: 'destructive',
-        description: 'An error occurred. Please try again.',
+        variant: "destructive",
+        description: "An error occurred. Please try again.",
       });
     }
   }
@@ -39,35 +39,18 @@ export default function SignInForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className='max-w-sm space-y-4 mb-7'
+        className="mb-7 max-w-sm space-y-4"
       >
         <FormField
           control={form.control}
-          name='email'
+          name="email"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input
-                  placeholder='Enter a email'
-                  className='bg-gray-50'
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name='password'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder='Enter a password'
-                  className='bg-gray-50'
+                  placeholder="Enter a email"
+                  className="bg-gray-50"
                   {...field}
                 />
               </FormControl>
@@ -76,8 +59,8 @@ export default function SignInForm() {
           )}
         />
         <Button
-          type='submit'
-          className='bg-blue-700 text-white w-full'
+          type="submit"
+          className="w-full bg-blue-700 text-white"
           disabled={form.formState.isSubmitting}
         >
           Submit

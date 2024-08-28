@@ -1,11 +1,18 @@
 'use client';
 
+import avatarPlaceholder from '@/assets/images/avatar_placeholder.png';
 import { Sling as Hamburger } from 'hamburger-react';
+import { signOut, useSession } from 'next-auth/react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
+import { Lock, LogOut } from 'lucide-react';
+
 function HamburgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
+  const session = useSession();
+  const user = session.data?.user;
 
   useEffect(() => {
     if (isOpen) {
@@ -21,49 +28,96 @@ function HamburgerMenu() {
   return (
     <>
       <div
-        id='hamburger'
-        className='absolute  right-5 flex items-end justify-end sm:hidden z-20 '
+        id="hamburger"
+        className="absolute right-5 z-20 flex items-end justify-end sm:hidden"
       >
         <Hamburger toggled={isOpen} toggle={setIsOpen} />
       </div>
 
       <div className={`sm:hidden ${isOpen ? 'block' : 'hidden'}`}>
-        <div className='px-2 py-2 gap-3 w-4/6 h-dvh right-0 top-0 flex flex-col absolute pt-[72px] bg-gray-50  drop-shadow-lg z-10'>
+        <div className="absolute right-0 top-0 z-10 flex h-dvh w-full flex-col gap-3 bg-gray-50 px-2 py-2 pt-[72px] drop-shadow-lg">
           <Link
-            className='border-y pb-2 pt-4 text-lg'
+            className="border-y pb-2 pt-4 text-lg"
             onClick={() => setIsOpen(false)}
-            href='/buy'
+            href="/buy"
           >
             Buy
           </Link>
           <Link
-            className='border-b py-2 text-lg'
+            className="border-b py-2 text-lg"
             onClick={() => setIsOpen(false)}
-            href='/sell'
+            href="/sell"
           >
             Sell
           </Link>
           <Link
-            className='border-b py-2 text-lg'
+            className="border-b py-2 text-lg"
             onClick={() => setIsOpen(false)}
-            href='/rent'
+            href="/rent"
           >
             Rent
           </Link>
           <Link
-            className='border-b py-2 text-lg'
+            className="border-b py-2 text-lg"
             onClick={() => setIsOpen(false)}
-            href='/agents'
+            href="/agents"
           >
             Agents
           </Link>
-          <Link
-            className='px-4 py-2 w-2/3 text-center text-white bg-blue-700 hover:bg-blue-800 rounded-xl self-center text-xl mt-4'
-            onClick={() => setIsOpen(false)}
-            href='/signin'
-          >
-            Sign In
-          </Link>
+          {user && (
+            <Link
+              className="flex items-center gap-2 border-b py-2 text-lg"
+              href="/settings"
+              onClick={() => setIsOpen(false)}
+            >
+              <Image
+                src={user.image || avatarPlaceholder}
+                alt="User profile picture"
+                width={30}
+                height={30}
+                className="bg-background aspect-square rounded-full object-cover"
+              />
+              <span>{user.name}</span>
+            </Link>
+          )}
+          {!user && session.status !== 'loading' && (
+            <Link
+              className="mt-4 w-2/3 self-center rounded-xl bg-blue-700 px-4 py-2 text-center text-xl text-white hover:bg-blue-800"
+              onClick={() => setIsOpen(false)}
+              href="/signin"
+            >
+              Sign In
+            </Link>
+          )}
+          <div className="w-fullf mt-auto flex flex-col">
+            {user?.role === 'admin' && (
+              <Link
+                className="flex items-center gap-2 border-b border-t py-2 text-lg"
+                onClick={() => setIsOpen(false)}
+                href="/admin"
+              >
+                <span>
+                  <Lock />
+                </span>
+                Admin
+              </Link>
+            )}
+            {user && (
+              <button
+                className="flex items-center gap-2 border-b border-t py-2 text-lg"
+                onClick={() => {
+                  setIsOpen(false);
+                  signOut({ callbackUrl: '/' });
+                }}
+                href="/agents"
+              >
+                <span>
+                  <LogOut />
+                </span>
+                Sign Out
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </>

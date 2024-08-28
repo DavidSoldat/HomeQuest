@@ -1,70 +1,70 @@
-import features from '@/public/features.jpeg';
-import Image from 'next/image';
+import features from "@/public/features.jpeg";
+import Image from "next/image";
 import {
   BellIcon,
   BriefcaseIcon,
   EnvelopeIcon,
-} from '@heroicons/react/24/outline';
+} from "@heroicons/react/24/outline";
 
 function Features() {
   return (
-    <div className='border  border-gray-200 rounded-lg boxShadow flex flex-col md:flex-row w-fit relative md:max-w-6xl lg:mx-auto py-5 '>
-      <div className='md:w-1/2 mx-7 mt-7 md:m-12 '>
-        <h1 className='text-5xl font-semibold text-primary-darkGray leading-tight px-3'>
+    <div className="boxShadow relative flex w-fit flex-col rounded-lg border border-gray-200 py-5 md:max-w-6xl md:flex-row lg:mx-auto">
+      <div className="mx-7 mt-7 md:m-12 md:w-1/2">
+        <h1 className="text-primary-darkGray px-3 text-5xl font-semibold leading-tight">
           Our Top Features
         </h1>
-        <p className='px-3 py-3 text-gray-500 text-xl'>
+        <p className="px-3 py-3 text-xl text-gray-500">
           Discover the cutting-edge features that make HomeFinder Pro your best
           choice for real estate needs.
         </p>
-        <ul className='flex flex-col p-3'>
-          <li className='flex items-start my-3'>
-            <div className='flex w-fit pt-2 mr-5 '>
-              <BriefcaseIcon className='size-6 text-primary-darkGray' />
+        <ul className="flex flex-col p-3">
+          <li className="my-3 flex items-start">
+            <div className="mr-5 flex w-fit pt-2">
+              <BriefcaseIcon className="text-primary-darkGray size-6" />
             </div>
-            <div className='flex flex-col'>
-              <h1 className='text-primary-darkGray font-semibold text-lg'>
+            <div className="flex flex-col">
+              <h1 className="text-primary-darkGray text-lg font-semibold">
                 Advanced Search
               </h1>
-              <p className='text-gray-500 text-sm '>
+              <p className="text-sm text-gray-500">
                 Filter by location, price, and more to find the perfect property
                 tailored to your needs quickly and easily.
               </p>
             </div>
           </li>
-          <li className='flex items-start my-3'>
-            <div className='flex w-fit pt-2  mr-5 '>
-              <EnvelopeIcon className='size-6 text-primary-darkGray' />
+          <li className="my-3 flex items-start">
+            <div className="mr-5 flex w-fit pt-2">
+              <EnvelopeIcon className="text-primary-darkGray size-6" />
             </div>
-            <div className='flex flex-col'>
-              <h1 className='text-primary-darkGray font-semibold text-lg'>
-                Advanced Search
+            <div className="flex flex-col">
+              <h1 className="text-primary-darkGray text-lg font-semibold">
+                Agent Network
               </h1>
-              <p className='text-gray-500 text-sm '>
-                Filter by location, price, and more to find the perfect property
-                tailored to your needs quickly and easily.
+              <p className="text-sm text-gray-500">
+                Connect with trusted real estate agents who can guide you
+                through every step of the home-buying process.
               </p>
             </div>
           </li>
-          <li className='flex items-start my-3'>
-            <div className='flex w-fit pt-2  mr-5'>
-              <BellIcon className='size-6 text-primary-darkGray' />
+          <li className="my-3 flex items-start">
+            <div className="mr-5 flex w-fit pt-2">
+              <BellIcon className="text-primary-darkGray size-6" />
             </div>
-            <div className='flex flex-col'>
-              <h1 className='text-primary-darkGray font-semibold text-lg'>
-                Advanced Search
+            <div className="flex flex-col">
+              <h1 className="text-primary-darkGray text-lg font-semibold">
+                Virtual Tours
               </h1>
-              <p className='text-gray-500 text-sm '>
-                Filter by location, price, and more to find the perfect property
-                tailored to your needs quickly and easily.
+              <p className="text-sm text-gray-500">
+                Experience properties like never before with our immersive
+                virtual tours, available for many of our listings.
               </p>
             </div>
           </li>
         </ul>
       </div>
 
-      <div className='md:w-1/2  m-6 md:m-12  '>
-        <Image src={features} alt='building' className='rounded-lg max-h-fit' />
+      <div className="m-6 md:m-12 md:w-1/2">
+        <Image src={features} alt="building" className="max-h-fit rounded-lg" />
       </div>
     </div>
   );

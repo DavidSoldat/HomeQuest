@@ -27,7 +27,7 @@ function Faq() {
     {
       question: 'How do I sign up?',
       answer:
-        'Signing up is easy! Click "Sign Up" at the top of the page, fill out the form, and verify your email to get started.',
+        'Signing up is easy! Click "Sign In" at the top of the page, fill out the form, and verify your email to get started.',
     },
     {
       question: 'Are there any fees?',

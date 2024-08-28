@@ -1,7 +1,9 @@
+'use client';
 import avatarPlaceholder from '@/assets/images/avatar_placeholder.png';
-import { LogOut, Settings } from 'lucide-react';
+import { Lock, LogOut, Settings } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { signOut } from 'next-auth/react';
 
 import {
   DropdownMenu,
@@ -13,45 +15,48 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Button } from './Button';
-import { signOut } from '@/auth';
 
 export default function UserButton({ user }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button size='icon' className='flex-none rounded-full'>
+        <Button size="icon" className="flex-none rounded-full">
           <Image
             src={user.image || avatarPlaceholder}
-            alt='User profile picture'
+            alt="User profile picture"
             width={50}
             height={50}
-            className='aspect-square rounded-full bg-background object-cover'
+            className="bg-background aspect-square rounded-full object-cover"
           />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='w-56 bg-white '>
+      <DropdownMenuContent className="w-56 bg-white">
         <DropdownMenuLabel>{user.name || 'User'}</DropdownMenuLabel>
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator className="bg-gray-100" />
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
-            <Link href='/settings' className='cursor-pointer'>
-              <Settings className='mr-2 h-4 w-4' />
+            <Link href="/settings" className="cursor-pointer hover:bg-blue-50">
+              <Settings className="mr-2 h-4 w-4" />
               <span>Settings</span>
             </Link>
           </DropdownMenuItem>
+          {user.role === 'admin' && (
+            <DropdownMenuItem asChild>
+              <Link href="/admin" className="cursor-pointer hover:bg-blue-50">
+                <Lock className="mr-2 h-4 w-4" />
+                Admin
+              </Link>
+            </DropdownMenuItem>
+          )}
         </DropdownMenuGroup>
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator className="bg-gray-100" />
         <DropdownMenuItem asChild>
-          <form
-            action={async () => {
-              'use server';
-              await signOut();
-            }}
+          <button
+            onClick={() => signOut({ callbackUrl: '/' })}
+            className="flex w-full cursor-pointer items-center hover:bg-blue-50"
           >
-            <button type='submit' className='flex w-full items-center'>
-              <LogOut className='mr-2 h-4 w-4' /> Sign Out
-            </button>
-          </form>
+            <LogOut className="mr-2 h-4 w-4" /> Sign Out
+          </button>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -11,26 +11,6 @@ export default function LayoutForms({ children }) {
           Welcome to Home Quest
         </h1>
         <div className='my-4 w-full flex border-b border-gray-200'>
-          <Link
-            href='/signin'
-            className={
-              pathname === '/signin'
-                ? 'border-b-4 pb-1 border-blue-700 px-3 py-2'
-                : 'px-3 py-2'
-            }
-          >
-            Sign in
-          </Link>
-          <Link
-            href='/signup'
-            className={
-              pathname === '/signup'
-                ? 'border-b-4 pb-1 border-blue-700 px-3 py-2'
-                : 'px-3 py-2'
-            }
-          >
-            New account
-          </Link>
         </div>
         <div className='w-full'>{children}</div>
       </div>
