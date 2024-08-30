@@ -15,5 +15,5 @@ Frontend: Next.js, TailwindCSS\
 Backend: Next.js API Routes\
 Database: Vercel Postgres\
 Storage: Firebase Cloud Storage\
-Authentication: NextAuth\
+Authentication: Auth.js\
 Hosting: Vercel
