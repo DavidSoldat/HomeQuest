@@ -1,4 +1,4 @@
-HomeQuest is an advanced real estate platform designed to streamline the process of buying, selling, and renting properties. The application provides users with powerful search and filtering options, detailed property listings, and secure payment processing. Whether you're a homeowner, buyer, or real estate professional, HomeQuest aims to provide a seamless experience navigating the real estate market.\
+HomeQuest is an advanced real estate platform designed to streamline the process of buying, selling, and renting properties. The application provides users with powerful search and filtering options, detailed property listings, and much more. Whether you're a homeowner, buyer, or real estate professional, HomeQuest aims to provide a seamless experience navigating the real estate market.\
 \
 Features:\
 \
