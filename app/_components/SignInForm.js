@@ -11,9 +11,8 @@ import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Button } from '../_components/Button';
-import { LoginFormSchema } from '../_lib/validations';
-import { signIn } from '@/auth';
 import { signInSendgrid } from '../_lib/actions';
+import { LoginFormSchema } from '../_lib/validations';
 
 export default function SignInForm() {
   const form = useForm({

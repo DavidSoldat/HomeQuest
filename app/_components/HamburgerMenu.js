@@ -89,7 +89,7 @@ function HamburgerMenu() {
               Sign In
             </Link>
           )}
-          <div className="w-fullf mt-auto flex flex-col">
+          <div className="mt-auto flex w-full flex-col">
             {user?.role === 'admin' && (
               <Link
                 className="flex items-center gap-2 border-b border-t py-2 text-lg"

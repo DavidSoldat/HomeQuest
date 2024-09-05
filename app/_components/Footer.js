@@ -4,8 +4,8 @@ function Footer() {
   return (
     <footer className="relative border-t border-gray-200 pb-14 pt-7">
       <div className="relative w-full px-4 md:max-w-6xl lg:mx-auto">
-        <div className="flex w-full flex-wrap gap-10 md:justify-between">
-          <div>
+        <div className="flex w-full flex-wrap justify-between gap-10">
+          <div className="flex flex-col-reverse">
             <span className="text-gray-500">© 2024 David Soldat</span>
             <div className="my-2 flex gap-2">
               <Link href="https://www.facebook.com/">

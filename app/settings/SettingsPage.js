@@ -9,13 +9,12 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Button } from '../_components/Button';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useToast } from '@/components/ui/use-toast';
-import { useForm } from 'react-hook-form';
-import { updateProfileSchema } from '../_lib/validations';
-import { updateProfile } from '../_lib/actions';
 import { useSession } from 'next-auth/react';
+import { useForm } from 'react-hook-form';
+import { Button } from '../_components/Button';
+import { updateProfile } from '../_lib/actions';
+import { updateProfileSchema } from '../_lib/validations';
 
 export default function SettingsPage({ user }) {
   const session = useSession();

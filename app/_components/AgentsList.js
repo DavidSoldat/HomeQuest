@@ -3,27 +3,17 @@ import { StarIcon } from 'lucide-react';
 import Image from 'next/image';
 import { faker } from '@faker-js/faker';
 import Link from 'next/link';
+import { getAgents } from '../_lib/actions';
 
-export default function AgentCard() {
-  function createAgent() {
-    return {
-      _id: faker.string.uuid(),
-      avatar: agentImage,
-      email: faker.internet.email(),
-      fullName: faker.person.fullName(),
-      type: faker.helpers.arrayElement(['team']),
-      rating: (Math.random() * 5.0).toFixed(1),
-    };
-  }
-
-  const agents = Array.from({ length: 10 }, createAgent);
+export default async function AgentCard() {
+  const agents = await getAgents();
 
   return (
     <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2">
       {agents.map((agent) => (
         <div
           className="agentCard flex rounded-md hover:border hover:bg-blue-50"
-          key={agent._id}
+          key={agent.id}
         >
           <Link href="/" className="w-full p-6">
             <div className="flex">
@@ -43,7 +33,7 @@ export default function AgentCard() {
                 <div>
                   <div className="flex justify-between">
                     <span className="rounded-md bg-blue-100 px-1 py-0.5 text-xs font-medium uppercase">
-                      team
+                      {agent.type}
                     </span>
                     <div className="flex items-center justify-center">
                       <span className="mr-1 text-sm font-bold">
@@ -53,7 +43,7 @@ export default function AgentCard() {
                       <span className="text-sm text-gray-500">(234)</span>
                     </div>
                   </div>
-                  <h2 className="text-xl font-bold">{agent.fullName}</h2>
+                  <h2 className="text-xl font-bold">{agent.name}</h2>
                   <p className="text-base text-gray-500">BL Realestate</p>
                 </div>
                 <div>
