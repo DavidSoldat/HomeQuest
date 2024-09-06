@@ -16,6 +16,7 @@ import { addAgent } from '../_lib/actions';
 import { uploadFile } from '../_lib/storage';
 import { addAgentSchema } from '../_lib/validations';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 export default function AddAgent() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -35,8 +36,10 @@ export default function AddAgent() {
 
     try {
       await addAgent(newValues);
+      toast.success('New agent added');
     } catch (error) {
       console.log(error);
+      throw error;
     }
   }
 

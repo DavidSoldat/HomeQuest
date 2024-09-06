@@ -1,11 +1,14 @@
-import { getAgents } from '@/app/_lib/actions';
+import AgentActions from '@/app/_components/AgentActions';
+import { deleteAgent, getAgents } from '@/app/_lib/actions';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
 import {
   Table,
   TableBody,
@@ -15,18 +18,30 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { ChevronLeft, Ellipsis, Pencil, Trash2 } from 'lucide-react';
 import Link from 'next/link';
+
+export const revalidate = 3600;
 
 export default async function EditAgents() {
   const agents = await getAgents();
   return (
     <div className="flex w-full flex-col gap-6 px-4 pb-10 pt-6 md:max-w-6xl lg:mx-auto">
-      <Link href="/admin" className="flex items-center hover:underline">
-        <ChevronLeft size={16} />
-        Dashborad
-      </Link>
-      <h2 className="font-semibold">Edit agents</h2>
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild>
+              <Link className="hover:underline" href="/admin">
+                Dashboard
+              </Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>Manage Agents</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+      <h2 className="font-semibold">Manage agents</h2>
       <div>
         <Table>
           <TableCaption>List of Agents</TableCaption>
@@ -47,25 +62,11 @@ export default async function EditAgents() {
                     <AvatarImage src={agent.image} alt="agent image" />
                     <AvatarFallback>Avatar</AvatarFallback>
                   </Avatar>
-                  Test Test
+                  {agent.name}
                 </TableCell>
                 <TableCell>{agent.email}</TableCell>
                 <TableCell>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger>
-                      <Ellipsis size={16} />
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      <DropdownMenuItem className="flex cursor-pointer gap-2">
-                        <Pencil size={16} />
-                        <span>Edit</span>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem className="flex cursor-pointerg gap-2">
-                        <Trash2 size={16} />
-                        <span>Delete</span>
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                  <AgentActions agent={agent} deleteAgent={deleteAgent} />
                 </TableCell>
               </TableRow>
             ))}

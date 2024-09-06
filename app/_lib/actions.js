@@ -2,8 +2,9 @@
 
 import { auth, signIn } from '@/auth';
 import { addAgentSchema, updateProfileSchema } from './validations';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, unstable_cache } from 'next/cache';
 import prisma from './prisma';
+import { deleteFile } from './storage';
 
 export async function signInGoogle() {
   await signIn('google');
@@ -38,8 +39,6 @@ export async function addAgent(values) {
   const session = await auth();
   const user = session?.user;
 
-  console.log(user);
-
   const { name, email, image, type, rating } = addAgentSchema.parse(values);
 
   await prisma.agent.create({
@@ -54,9 +53,55 @@ export async function addAgent(values) {
   revalidatePath('/');
 }
 
-export async function getAgents() {
-  const agents = await prisma.agent.findMany();
+export async function deleteAgent(agentId) {
+  try {
+    const agent = await prisma.agent.findUnique({
+      where: {
+        id: agentId,
+      },
+      select: {
+        image: true,
+      },
+    });
 
-  revalidatePath('/agents');
-  return agents;
+    const path = agent.image.split('/o/')[1]?.split('?')[0];
+    const decodedPath = decodeURIComponent(path);
+    console.log(decodedPath);
+    await deleteFile(decodedPath);
+
+    await prisma.agent.delete({
+      where: {
+        id: agentId,
+      },
+    });
+
+    revalidatePath('/admin/manageagents');
+  } catch (error) {
+    console.error('Error deleting agent:', error);
+  }
+}
+
+export const getAgents = unstable_cache(
+  async () => {
+    return await prisma.agent.findMany();
+  },
+  revalidatePath('/agents'),
+  revalidatePath('/admin/manageagents'),
+);
+
+export async function editAgent(values, agentId) {
+  let { name, email, type, rating } = values;
+  await prisma.agent.update({
+    where: {
+      id: agentId,
+    },
+    data: {
+      name: name,
+      email: email,
+      type: type,
+      rating: rating,
+    },
+  });
+
+  revalidatePath('/agents'), revalidatePath('/admin/manageagents');
 }

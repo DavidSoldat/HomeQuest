@@ -1,6 +1,11 @@
-import { nanoid } from 'nanoid';
 import { storage } from '@/app/config/firebase';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytes,
+} from 'firebase/storage';
+import { nanoid } from 'nanoid';
 
 export async function uploadFile(file, folder) {
   try {
@@ -23,6 +28,17 @@ export async function getFile(path) {
     const fileRef = ref(storage, path);
     return getDownloadURL(fileRef);
   } catch (error) {
+    throw error;
+  }
+}
+
+export async function deleteFile(path) {
+  try {
+    const fileRef = ref(storage, path);
+    await deleteObject(fileRef);
+    console.log('File deleted successfully');
+  } catch (error) {
+    console.error('Error deleting file:', error);
     throw error;
   }
 }

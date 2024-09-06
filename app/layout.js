@@ -1,18 +1,21 @@
-import "@/app/_styles/globals.css";
-import { Inter } from "next/font/google";
-import Footer from "./_components/Footer";
-import Header from "./_components/Header";
-import { SessionProvider } from "next-auth/react";
+import '@/app/_styles/globals.css';
+import { SessionProvider } from 'next-auth/react';
+import { Inter } from 'next/font/google';
+import Footer from './_components/Footer';
+import Header from './_components/Header';
+import { Toaster } from 'react-hot-toast';
 
-const inter = Inter({ subsets: ["latin"], display: "swap" });
+const inter = Inter({ subsets: ['latin'], display: 'swap' });
+
+export const revalidate = 86400;
 
 export const metadata = {
   title: {
-    template: " %s · Home Quest",
-    default: "Home Quest",
+    template: ' %s · Home Quest',
+    default: 'Home Quest',
   },
   description:
-    "Find your perfect home with HomeQuest. Explore diverse property listings, manage your real estate portfolio, and connect with buyers, sellers, and agents.",
+    'Find your perfect home with HomeQuest. Explore diverse property listings, manage your real estate portfolio, and connect with buyers, sellers, and agents.',
 };
 
 export default function RootLayout({ children }) {
@@ -22,6 +25,7 @@ export default function RootLayout({ children }) {
         <SessionProvider>
           <Header />
           <main className="mx-0 flex w-full flex-1">{children}</main>
+          <Toaster />
           <Footer />
         </SessionProvider>
       </body>

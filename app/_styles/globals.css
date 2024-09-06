@@ -17,3 +17,9 @@
 .agentCard:hover {
   box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 8px 0px;
 }
+.editButton {
+  @apply flex cursor-pointer gap-2 hover:bg-gray-50;
+}
+.dashboardSideButton {
+  @apply flex w-full items-center justify-center gap-2 border-b py-2 text-gray-700 hover:text-blue-600;
+}

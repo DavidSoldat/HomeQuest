@@ -1,3 +1,4 @@
+import { Settings2, UserRoundPlus } from 'lucide-react';
 import Link from 'next/link';
 
 export default function layoutAdmin({ children }) {
@@ -7,17 +8,13 @@ export default function layoutAdmin({ children }) {
         <h1 className="mb-4 w-full bg-gray-100 py-4 text-center text-lg font-semibold text-gray-700">
           Admin Dashboard
         </h1>
-        <Link
-          className="w-full border-b py-2 text-center text-gray-700 hover:text-blue-600"
-          href="/admin/addagent"
-        >
+        <Link className="dashboardSideButton" href="/admin/addagent">
+          <UserRoundPlus size={16} />
           Add Agent
         </Link>
-        <Link
-          className="w-full border-b py-2 text-center text-gray-700 hover:text-blue-600"
-          href="/admin/editagents"
-        >
-          Edit Agents
+        <Link className="dashboardSideButton" href="/admin/manageagents">
+          <Settings2 size={16} />
+          Manage Agents
         </Link>
       </aside>
       <div className="w-4/5">{children}</div>

@@ -1,7 +1,5 @@
-import agentImage from '@/assets/images/agent-image.jpg';
 import { StarIcon } from 'lucide-react';
 import Image from 'next/image';
-import { faker } from '@faker-js/faker';
 import Link from 'next/link';
 import { getAgents } from '../_lib/actions';
 
@@ -20,7 +18,7 @@ export default async function AgentCard() {
               <div className="block">
                 <div className="relative mr-5 aspect-square h-16 w-16 md:h-40 md:w-40">
                   <Image
-                    src={agentImage}
+                    src={agent.image}
                     fill
                     alt="agent avatar"
                     className="rounded-full object-cover"

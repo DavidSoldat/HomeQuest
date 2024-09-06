@@ -4,8 +4,8 @@ import Image from 'next/image';
 
 function Logo() {
   return (
-    <Link href='/'>
-      <Image src={logo} alt='Home Quest logo' height='35' />
+    <Link href="/">
+      <Image src={logo} alt="Home Quest logo" height="35" priority />
     </Link>
   );
 }
