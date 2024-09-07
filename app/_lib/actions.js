@@ -9,9 +9,11 @@ import { deleteFile } from './storage';
 export async function signInGoogle() {
   await signIn('google');
 }
+
 export async function signInGithub() {
   await signIn('github');
 }
+
 export async function signInSendgrid(data) {
   await signIn('sendgrid', data);
 }
@@ -20,37 +22,47 @@ export async function updateProfile(values) {
   const session = await auth();
   const userId = session?.user?.id;
 
-  if (!userId) throw Error('Unauthorized');
+  if (!userId) throw new Error('Unauthorized');
 
   const { name } = updateProfileSchema.parse(values);
 
-  await prisma.user.update({
-    where: {
-      id: userId,
-    },
-    data: {
-      name,
-    },
-  });
-  revalidatePath('/');
+  try {
+    await prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        name,
+      },
+    });
+    revalidatePath('/');
+  } catch (error) {
+    throw new Error('Error updating profile: ' + error.message);
+  }
 }
 
 export async function addAgent(values) {
   const session = await auth();
   const user = session?.user;
 
+  if (!user) throw new Error('Unauthorized');
+
   const { name, email, image, type, rating } = addAgentSchema.parse(values);
 
-  await prisma.agent.create({
-    data: {
-      name,
-      email,
-      image,
-      type,
-      rating,
-    },
-  });
-  revalidatePath('/');
+  try {
+    await prisma.agent.create({
+      data: {
+        name,
+        email,
+        image,
+        type,
+        rating,
+      },
+    });
+    revalidatePath('/');
+  } catch (error) {
+    throw new Error('Error adding agent: ' + error.message);
+  }
 }
 
 export async function deleteAgent(agentId) {
@@ -64,10 +76,12 @@ export async function deleteAgent(agentId) {
       },
     });
 
-    const path = agent.image.split('/o/')[1]?.split('?')[0];
-    const decodedPath = decodeURIComponent(path);
-    console.log(decodedPath);
-    await deleteFile(decodedPath);
+    if (agent?.image) {
+      const path = agent.image.split('/o/')[1]?.split('?')[0];
+      const decodedPath = decodeURIComponent(path);
+      console.log(decodedPath);
+      await deleteFile(decodedPath);
+    }
 
     await prisma.agent.delete({
       where: {
@@ -78,30 +92,36 @@ export async function deleteAgent(agentId) {
     revalidatePath('/admin/manageagents');
   } catch (error) {
     console.error('Error deleting agent:', error);
+    throw new Error('Failed to delete agent');
   }
 }
 
-export const getAgents = unstable_cache(
-  async () => {
+export const getAgents = unstable_cache(async () => {
+  try {
     return await prisma.agent.findMany();
-  },
-  revalidatePath('/agents'),
-  revalidatePath('/admin/manageagents'),
-);
+  } catch (error) {
+    throw new Error('Error fetching agents: ' + error.message);
+  }
+});
 
 export async function editAgent(values, agentId) {
-  let { name, email, type, rating } = values;
-  await prisma.agent.update({
-    where: {
-      id: agentId,
-    },
-    data: {
-      name: name,
-      email: email,
-      type: type,
-      rating: rating,
-    },
-  });
+  const { name, email, type, rating } = values;
 
-  revalidatePath('/agents'), revalidatePath('/admin/manageagents');
+  try {
+    await prisma.agent.update({
+      where: {
+        id: agentId,
+      },
+      data: {
+        name,
+        email,
+        type,
+        rating,
+      },
+    });
+    revalidatePath('/agents');
+    revalidatePath('/admin/manageagents');
+  } catch (error) {
+    throw new Error('Error updating agent: ' + error.message);
+  }
 }

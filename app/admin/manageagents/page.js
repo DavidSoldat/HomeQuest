@@ -20,10 +20,9 @@ import {
 } from '@/components/ui/table';
 import Link from 'next/link';
 
-export const revalidate = 3600;
-
 export default async function EditAgents() {
   const agents = await getAgents();
+
   return (
     <div className="flex w-full flex-col gap-6 px-4 pb-10 pt-6 md:max-w-6xl lg:mx-auto">
       <Breadcrumb>

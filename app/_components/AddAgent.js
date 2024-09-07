@@ -20,8 +20,10 @@ import toast from 'react-hot-toast';
 
 export default function AddAgent() {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   async function onSubmit(values) {
+    setIsLoading(true);
     const folder = 'agents/';
     let image = '';
 
@@ -40,6 +42,8 @@ export default function AddAgent() {
     } catch (error) {
       console.log(error);
       throw error;
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -50,7 +54,7 @@ export default function AddAgent() {
       email: '',
       image: '',
       type: '',
-      rating: '',
+      rating: 0,
     },
   });
 
@@ -129,7 +133,7 @@ export default function AddAgent() {
         />
 
         <Button className="bg-blue-600 text-white" type="submit">
-          Submit
+          {isLoading ? 'Adding Agent...' : 'Add agent'}
         </Button>
       </form>
     </Form>
