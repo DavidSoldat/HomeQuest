@@ -47,29 +47,29 @@ function Faq() {
   ];
 
   return (
-    <div className=' py-12 md:max-w-6xl lg:mx-auto px-4'>
-      <header className='flex flex-col gap-3 mb-7'>
-        <h2 className='text-5xl font-semibold text-primary-darkGray'>
+    <div className="px-4 py-12 md:max-w-6xl lg:mx-auto">
+      <header className="mb-7 flex flex-col gap-3">
+        <h2 className="text-primary-darkGray text-5xl font-semibold">
           Frequently Asked Questions
         </h2>
-        <p className=' text-gray-500 text-xl'>
+        <p className="text-xl text-gray-500">
           Detailed answers to common questions about using Home Quest to buy or
           sell your home.
         </p>
       </header>
-      <div className='flex flex-col cursor-pointer border border-gray-200 rounded-lg boxShadow divide-y-2 divide-gray-200 '>
+      <div className="boxShadow flex cursor-pointer flex-col divide-y-2 divide-gray-200 rounded-lg border border-gray-200">
         {faqs.map((faq, index) => (
           <div key={index}>
             <h3
               onClick={() => handleToggle(index)}
-              className={`cursor-pointer text-primary-darkGray font-medium text-lg p-6 ${
+              className={`text-primary-darkGray cursor-pointer p-6 text-lg font-medium ${
                 openIndex === index ? 'underline' : ''
               }`}
             >
               {faq.question}
             </h3>
             {openIndex === index && (
-              <div className='-mt-5 px-6 pb-5 text-gray-500'>{faq.answer}</div>
+              <div className="-mt-5 px-6 pb-5 text-gray-500">{faq.answer}</div>
             )}
           </div>
         ))}

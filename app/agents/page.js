@@ -1,8 +1,10 @@
-import AgentCard from '../_components/AgentsList';
+import AgentsList from '../_components/AgentsList';
 
 export const metadata = {
   title: 'Agents',
 };
+
+export const revalidate = 3600;
 
 function Agents() {
   return (
@@ -14,7 +16,8 @@ function Agents() {
         With hundreds of agents from all the top brokerages, a local agent knows
         your market and can guide you through the process from start to finish
       </p>
-      <AgentCard />
+
+      <AgentsList />
     </div>
   );
 }

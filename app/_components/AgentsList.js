@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getAgents } from '../_lib/actions';
 
-export default async function AgentCard() {
+export default async function AgentsList() {
   const agents = await getAgents();
 
   return (
@@ -13,7 +13,7 @@ export default async function AgentCard() {
           className="agentCard flex rounded-md hover:border hover:bg-blue-50"
           key={agent.id}
         >
-          <Link href="/" className="w-full p-6">
+          <Link href={`/agents/${agent.id}`} className="w-full p-6">
             <div className="flex">
               <div className="block">
                 <div className="relative mr-5 aspect-square h-16 w-16 md:h-40 md:w-40">

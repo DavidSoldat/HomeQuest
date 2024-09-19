@@ -79,7 +79,6 @@ export async function deleteAgent(agentId) {
     if (agent?.image) {
       const path = agent.image.split('/o/')[1]?.split('?')[0];
       const decodedPath = decodeURIComponent(path);
-      console.log(decodedPath);
       await deleteFile(decodedPath);
     }
 
@@ -103,6 +102,18 @@ export const getAgents = unstable_cache(async () => {
     throw new Error('Error fetching agents: ' + error.message);
   }
 });
+
+export const getAgent = async (agentId) => {
+  try {
+    return await prisma.agent.findUnique({
+      where: {
+        id: agentId,
+      },
+    });
+  } catch (error) {
+    throw new Error('Error fetching agents: ' + error.message);
+  }
+};
 
 export async function editAgent(values, agentId) {
   const { name, email, type, rating } = values;
