@@ -14,9 +14,16 @@ import { useForm } from 'react-hook-form';
 import { editAgentSchema } from '../_lib/validations';
 import { editAgent } from '../_lib/actions';
 import toast from 'react-hot-toast';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 export default function ModalComponent({ agent, open, handleClose }) {
-  const { name, email, type, rating } = agent;
+  const { name, email, type, rating, rangeLower, rangeUpper } = agent;
   const form = useForm({
     resolver: zodResolver(editAgentSchema),
     defaultValues: {
@@ -24,6 +31,8 @@ export default function ModalComponent({ agent, open, handleClose }) {
       email: email,
       type: type,
       rating: rating,
+      rangeLower: rangeLower,
+      rangeUpper: rangeUpper,
     },
   });
   async function onSubmit(values) {
@@ -81,27 +90,89 @@ export default function ModalComponent({ agent, open, handleClose }) {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Agent Type</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Team/Agent" {...field} />
-                      </FormControl>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select type of agent" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent className="bg-white">
+                          <SelectItem
+                            className="cursor-pointer hover:bg-gray-100"
+                            value="team"
+                          >
+                            Team
+                          </SelectItem>
+                          <SelectItem
+                            className="cursor-pointer hover:bg-gray-100"
+                            value="agent"
+                          >
+                            Agent
+                          </SelectItem>
+                        </SelectContent>
+                      </Select>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
 
-                <FormField
-                  control={form.control}
-                  name="rating"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Agent Rating</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Rating" type="number" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                <div className="flex w-full space-x-8">
+                  <FormField
+                    control={form.control}
+                    name="rating"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Agent Rating</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Rating"
+                            type="number"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="rangeLower"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Lower price range </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Lower Price Range"
+                            type="number"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="rangeUpper"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Upper price range</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Upper Price Range"
+                            type="number"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
                 <div className="flex justify-between">
                   <Button className="bg-blue-600 text-white" type="submit">
                     Submit

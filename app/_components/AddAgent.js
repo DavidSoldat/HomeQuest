@@ -18,6 +18,14 @@ import { addAgentSchema } from '../_lib/validations';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+
 export default function AddAgent() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -55,12 +63,14 @@ export default function AddAgent() {
       image: '',
       type: '',
       rating: 0,
+      rangeLower: 0,
+      rangeUpper: 0,
     },
   });
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 py-4">
         <FormField
           control={form.control}
           name="name"
@@ -110,27 +120,82 @@ export default function AddAgent() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Agent Type</FormLabel>
-              <FormControl>
-                <Input placeholder="Team/Agent" {...field} />
-              </FormControl>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select type of agent" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent className="bg-white">
+                  <SelectItem
+                    className="cursor-pointer hover:bg-gray-100"
+                    value="team"
+                  >
+                    Team
+                  </SelectItem>
+                  <SelectItem
+                    className="cursor-pointer hover:bg-gray-100"
+                    value="agent"
+                  >
+                    Agent
+                  </SelectItem>
+                </SelectContent>
+              </Select>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <FormField
-          control={form.control}
-          name="rating"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Agent Rating</FormLabel>
-              <FormControl>
-                <Input placeholder="Rating" type="number" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="flex w-full space-x-8">
+          <FormField
+            control={form.control}
+            name="rating"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Agent Rating</FormLabel>
+                <FormControl>
+                  <Input placeholder="Rating" type="number" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="rangeLower"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Lower price range </FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Lower Price Range"
+                    type="number"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="rangeUpper"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Upper price range</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Upper Price Range"
+                    type="number"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
         <Button className="bg-blue-600 text-white" type="submit">
           {isLoading ? 'Adding Agent...' : 'Add agent'}

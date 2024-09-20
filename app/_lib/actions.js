@@ -47,7 +47,8 @@ export async function addAgent(values) {
 
   if (!user) throw new Error('Unauthorized');
 
-  const { name, email, image, type, rating } = addAgentSchema.parse(values);
+  const { name, email, image, type, rating, rangeLower, rangeUpper } =
+    addAgentSchema.parse(values);
 
   try {
     await prisma.agent.create({
@@ -57,9 +58,12 @@ export async function addAgent(values) {
         image,
         type,
         rating,
+        rangeLower,
+        rangeUpper,
       },
     });
-    revalidatePath('/');
+    revalidatePath('/agents');
+    revalidatePath('/admin');
   } catch (error) {
     throw new Error('Error adding agent: ' + error.message);
   }
@@ -116,7 +120,7 @@ export const getAgent = async (agentId) => {
 };
 
 export async function editAgent(values, agentId) {
-  const { name, email, type, rating } = values;
+  const { name, email, type, rating, rangeLower, rangeUpper } = values;
 
   try {
     await prisma.agent.update({
@@ -128,6 +132,8 @@ export async function editAgent(values, agentId) {
         email,
         type,
         rating,
+        rangeLower,
+        rangeUpper,
       },
     });
     revalidatePath('/agents');

@@ -8,10 +8,9 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Ellipsis, Pencil, Trash2 } from 'lucide-react';
 import { useState } from 'react';
-import ModalComponent from './Modal';
-import { editAgent } from '../_lib/actions';
-import DeleteAgentDialog from './DeleteAgentDialog';
 import toast from 'react-hot-toast';
+import DeleteAgentDialog from './DeleteAgentDialog';
+import ModalComponent from './Modal';
 
 export default function AgentActions({ agent, deleteAgent }) {
   const [open, setOpen] = useState(false);

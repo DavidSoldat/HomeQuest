@@ -32,12 +32,12 @@ model User {
 }
 
 model Agent {
-  id         String  @id @default(cuid())
-  name       String
-  email      String  @unique
-  image      String
-  type       String?
-  rating     Float?
+  id     String  @id @default(cuid())
+  name   String
+  email  String  @unique
+  image  String
+  type   String?
+  rating Float?
   rangeLower Int?
   rangeUpper Int?
 

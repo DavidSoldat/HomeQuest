@@ -47,7 +47,7 @@ export default async function AgentsList() {
                 <div>
                   <p className="text-gray-500">
                     <span className="font-bold text-gray-900">
-                      €152K - €452K
+                      €{agent.rangeLower}K - €{agent.rangeUpper}K
                     </span>{' '}
                     team price range
                   </p>
