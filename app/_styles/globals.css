@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+.root {
+  --detail-medium-contrast: rgb(234, 234, 234);
+  --text-high-contrast-rgb-value: 49, 49, 49;
+  --text-body: rgb(54, 49, 61);
+  --detail-high-contrast: rgb(192, 192, 192);
+}
+
 @media (min-width: 768px) {
   .clip-path {
     clip-path: polygon(10% 0, 0 100%, 100% 100%, 100% 0);
@@ -25,4 +32,98 @@
 }
 .dashboardSideButton {
   @apply flex w-full items-center justify-center gap-2 border-b py-2 text-gray-700 hover:text-blue-600;
+}
+
+.embla {
+  max-width: 70rem;
+  margin: auto;
+  --slide-height: 19rem;
+  --slide-spacing: 0.9rem;
+  --slide-size: 100%;
+  --slide-spacing-sm: 1.6rem;
+  --slide-size-sm: 50%;
+  --slide-spacing-lg: 2rem;
+  --slide-size-lg: calc(100% / 3);
+}
+.embla__viewport {
+  overflow: hidden;
+}
+.embla__container {
+  backface-visibility: hidden;
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+  margin-left: calc(var(--slide-spacing) * -1);
+  height: 310px;
+}
+@media (min-width: 750px) {
+  .embla__container {
+    margin-left: calc(var(--slide-spacing-sm) * -1);
+  }
+}
+@media (min-width: 1200px) {
+  .embla__container {
+    margin-left: calc(var(--slide-spacing-lg) * -1);
+  }
+}
+.embla__slide {
+  min-width: 0;
+  /* flex: 0 0 var(--slide-size); */
+  flex: 0 0 auto;
+  padding-left: var(--slide-spacing);
+}
+@media (min-width: 750px) {
+  .embla__slide {
+    /* flex: 0 0 var(--slide-size-sm); */
+    flex: 0 0 auto;
+    /* padding-left: var(--slide-spacing-sm); */
+  }
+}
+@media (min-width: 1200px) {
+  .embla__slide {
+    /* flex: 0 0 var(--slide-size-lg); */
+    flex: 0 0 auto;
+    /* padding-left: var(--slide-spacing-lg); */
+  }
+}
+.embla__controls {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  justify-content: space-between;
+  gap: 1.2rem;
+}
+.embla__buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+  align-items: center;
+}
+.embla__button {
+  -webkit-tap-highlight-color: rgba(var(--text-high-contrast-rgb-value), 0.5);
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  touch-action: manipulation;
+  display: inline-flex;
+  text-decoration: none;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  box-shadow: inset 0 0 0 0.12rem #111827;
+  width: 2.2rem;
+  height: 2.2rem;
+  z-index: 1;
+  border-radius: 50%;
+  color: #111827;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.embla__button:disabled {
+  color: #e5e7eb;
+  box-shadow: inset 0 0 0 0.15rem #f3f4f6;
+}
+.embla__button__svg {
+  width: 35%;
+  height: 35%;
 }

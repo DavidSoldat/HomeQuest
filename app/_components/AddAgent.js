@@ -114,37 +114,57 @@ export default function AddAgent() {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="type"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Agent Type</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+
+        <div className="flex w-full space-x-8">
+          <FormField
+            control={form.control}
+            name="company"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Company</FormLabel>
                 <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select type of agent" />
-                  </SelectTrigger>
+                  <Input placeholder="Company" {...field} />
                 </FormControl>
-                <SelectContent className="bg-white">
-                  <SelectItem
-                    className="cursor-pointer hover:bg-gray-100"
-                    value="team"
-                  >
-                    Team
-                  </SelectItem>
-                  <SelectItem
-                    className="cursor-pointer hover:bg-gray-100"
-                    value="agent"
-                  >
-                    Agent
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="type"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Agent Type</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select type of agent" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent className="bg-white">
+                    <SelectItem
+                      className="cursor-pointer hover:bg-gray-100"
+                      value="team"
+                    >
+                      Team
+                    </SelectItem>
+                    <SelectItem
+                      className="cursor-pointer hover:bg-gray-100"
+                      value="agent"
+                    >
+                      Agent
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
         <div className="flex w-full space-x-8">
           <FormField

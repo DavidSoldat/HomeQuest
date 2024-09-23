@@ -47,7 +47,7 @@ export async function addAgent(values) {
 
   if (!user) throw new Error('Unauthorized');
 
-  const { name, email, image, type, rating, rangeLower, rangeUpper } =
+  const { name, email, image, company, type, rating, rangeLower, rangeUpper } =
     addAgentSchema.parse(values);
 
   try {
@@ -56,6 +56,7 @@ export async function addAgent(values) {
         name,
         email,
         image,
+        company,
         type,
         rating,
         rangeLower,
@@ -120,7 +121,7 @@ export const getAgent = async (agentId) => {
 };
 
 export async function editAgent(values, agentId) {
-  const { name, email, type, rating, rangeLower, rangeUpper } = values;
+  const { name, email, type, rating, company, rangeLower, rangeUpper } = values;
 
   try {
     await prisma.agent.update({
@@ -130,6 +131,7 @@ export async function editAgent(values, agentId) {
       data: {
         name,
         email,
+        company,
         type,
         rating,
         rangeLower,

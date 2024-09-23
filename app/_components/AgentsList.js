@@ -42,7 +42,7 @@ export default async function AgentsList() {
                     </div>
                   </div>
                   <h2 className="text-xl font-bold">{agent.name}</h2>
-                  <p className="text-base text-gray-500">BL Realestate</p>
+                  <p className="text-base text-gray-500">{agent.company}</p>
                 </div>
                 <div>
                   <p className="text-gray-500">

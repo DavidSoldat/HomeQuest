@@ -32,14 +32,15 @@ model User {
 }
 
 model Agent {
-  id     String  @id @default(cuid())
-  name   String
-  email  String  @unique
-  image  String
-  type   String?
-  rating Float?
-  rangeLower Int?
-  rangeUpper Int?
+  id         String  @id @default(cuid())
+  name       String
+  email      String  @unique
+  company    String?
+  image      String
+  type       String
+  rating     Float
+  rangeLower Int
+  rangeUpper Int
 
   @@map("agents")
 }
