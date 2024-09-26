@@ -42,3 +42,54 @@ export const editAgentSchema = z
     message: 'Lower price must be smaller than upper price',
     path: ['rangeLower'],
   });
+
+export const addPropertySchema = z.object({
+  city: z
+    .string()
+    .min(2, { message: 'City must be at least 2 characters long' }),
+  address: z
+    .string()
+    .min(2, { message: 'Address must be at least 2 characters long' }),
+  bedrooms: z.enum(['zero', 'one', 'two', 'three', 'four', 'fiveOrMore'], {
+    message: 'Choose number of bedrooms',
+  }),
+  bathrooms: z.enum(['zero', 'one', 'two', 'three', 'four', 'fiveOrMore'], {
+    message: 'Choose number of bathrooms',
+  }),
+  sqmeter: z.preprocess(
+    (val) => Number(val),
+    z.number({ message: 'Input Sqare meters' }),
+  ),
+  price: z.preprocess(
+    (val) => Number(val),
+    z.number({ message: 'Input price' }),
+  ),
+  images: z.string().array(),
+  agentId: z.string(),
+  soldDate: z.string().optional(),
+});
+
+export const editPropertySchema = z.object({
+  city: z
+    .string()
+    .min(2, { message: 'City must be at least 2 characters long' }),
+  address: z
+    .string()
+    .min(2, { message: 'Address must be at least 2 characters long' }),
+  bedrooms: z.enum(['zero', 'one', 'two', 'three', 'four', 'fiveOrMore'], {
+    message: 'Choose number of bedrooms',
+  }),
+  bathrooms: z.enum(['zero', 'one', 'two', 'three', 'four', 'fiveOrMore'], {
+    message: 'Choose number of bathrooms',
+  }),
+  sqmeter: z.preprocess(
+    (val) => Number(val),
+    z.number({ message: 'Input Sqare meters' }),
+  ),
+  price: z.preprocess(
+    (val) => Number(val),
+    z.number({ message: 'Input price' }),
+  ),
+  agentId: z.string(),
+  soldDate: z.string().optional(),
+});

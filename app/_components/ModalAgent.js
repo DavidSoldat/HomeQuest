@@ -22,7 +22,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-export default function ModalComponent({ agent, open, handleClose }) {
+export default function ModalAgent({ agent, open, handleClose }) {
   const { name, email, type, rating, company, rangeLower, rangeUpper } = agent;
   const form = useForm({
     resolver: zodResolver(editAgentSchema),
@@ -46,6 +46,7 @@ export default function ModalComponent({ agent, open, handleClose }) {
       throw error;
     }
   }
+
   return (
     <>
       {open && (
@@ -193,7 +194,7 @@ export default function ModalComponent({ agent, open, handleClose }) {
                 </div>
                 <div className="flex justify-between">
                   <Button className="bg-blue-600 text-white" type="submit">
-                    Submit
+                    Edit Agent
                   </Button>
                   <Button
                     className="rounded bg-red-600 text-white"

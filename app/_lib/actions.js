@@ -1,10 +1,10 @@
 'use server';
 
 import { auth, signIn } from '@/auth';
-import { addAgentSchema, updateProfileSchema } from './validations';
 import { revalidatePath, unstable_cache } from 'next/cache';
 import prisma from './prisma';
 import { deleteFile } from './storage';
+import { addAgentSchema, updateProfileSchema } from './validations';
 
 export async function signInGoogle() {
   await signIn('google');
@@ -142,5 +142,131 @@ export async function editAgent(values, agentId) {
     revalidatePath('/admin/manageagents');
   } catch (error) {
     throw new Error('Error updating agent: ' + error.message);
+  }
+}
+
+export async function addProperty(values) {
+  const {
+    address,
+    city,
+    bedrooms,
+    bathrooms,
+    sqmeter,
+    price,
+    images,
+    agentId,
+    soldDate,
+  } = values;
+
+  try {
+    await prisma.property.create({
+      data: {
+        address,
+        bedrooms,
+        bathrooms,
+        sqmeter,
+        city,
+        price,
+        images,
+        agent: {
+          connect: { id: agentId },
+        },
+        soldDate,
+      },
+    });
+    console.log('Success');
+    revalidatePath('/admin/managelistings');
+  } catch (error) {
+    throw new Error('Error adding property: ' + error.message);
+  }
+}
+
+export const getProperties = unstable_cache(async () => {
+  try {
+    return await prisma.property.findMany();
+  } catch (error) {
+    throw new Error('Error fetching agents: ' + error.message);
+  }
+});
+
+export async function deleteProperty(propertyId) {
+  try {
+    const property = await prisma.property.findUnique({
+      where: {
+        id: propertyId,
+      },
+      select: {
+        images: true,
+      },
+    });
+
+    if (!property) {
+      console.warn(`Property with ID ${propertyId} does not exist.`);
+      throw new Error('Property not found');
+    }
+
+    if (property.images && property.images.length > 0) {
+      for (let i = 0; i < property.images.length; i++) {
+        const path = property.images[i].split('/o/')[1]?.split('?')[0];
+        if (path) {
+          const decodedPath = decodeURIComponent(path);
+          try {
+            await deleteFile(decodedPath);
+            console.log(`Successfully deleted: ${decodedPath}`);
+          } catch (error) {
+            console.error(`Failed to delete ${decodedPath}:`, error);
+          }
+        } else {
+          console.warn(`No valid path found for image at index ${i}`);
+        }
+      }
+    } else {
+      console.log('No images to delete for this property.');
+    }
+
+    await prisma.property.delete({
+      where: {
+        id: propertyId,
+      },
+    });
+
+    revalidatePath('/admin/managelistings');
+  } catch (error) {
+    console.error('Error deleting property:', error);
+    throw new Error('Failed to delete property');
+  }
+}
+
+export async function editProperty(values, propertyId) {
+  const {
+    address,
+    city,
+    bedrooms,
+    bathrooms,
+    sqmeter,
+    price,
+    agentId,
+    soldDate,
+  } = values;
+
+  try {
+    await prisma.property.update({
+      where: {
+        id: propertyId,
+      },
+      data: {
+        address,
+        city,
+        bedrooms,
+        bathrooms,
+        sqmeter,
+        price,
+        agentId,
+        soldDate,
+      },
+    });
+    revalidatePath('/admin/managelistings');
+  } catch (error) {
+    throw new Error('Error updating property: ' + error.message);
   }
 }

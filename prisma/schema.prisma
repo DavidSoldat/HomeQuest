@@ -32,17 +32,34 @@ model User {
 }
 
 model Agent {
-  id         String  @id @default(cuid())
+  id         String     @id @default(cuid())
   name       String
-  email      String  @unique
+  email      String     @unique
   company    String?
   image      String
   type       String
   rating     Float
   rangeLower Int
   rangeUpper Int
+  properties Property[]
 
   @@map("agents")
+}
+
+model Property {
+  id        String   @id @default(cuid())
+  address   String
+  bedrooms  String
+  bathrooms String
+  sqmeter   Float
+  city      String
+  price     Float
+  images    String[]
+  agent     Agent?   @relation(fields: [agentId], references: [id])
+  agentId   String?
+  soldDate  String?
+
+  @@map("properties")
 }
 
 model Account {

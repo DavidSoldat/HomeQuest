@@ -1,4 +1,4 @@
-import { Settings2, UserRoundPlus } from 'lucide-react';
+import { House, HousePlus, Settings2, UserRoundPlus } from 'lucide-react';
 import Link from 'next/link';
 
 export default function layoutAdmin({ children }) {
@@ -15,6 +15,14 @@ export default function layoutAdmin({ children }) {
         <Link className="dashboardSideButton" href="/admin/manageagents">
           <Settings2 size={16} />
           Manage Agents
+        </Link>
+        <Link className="dashboardSideButton" href="/admin/addlisting">
+          <HousePlus size={16} />
+          Add Listing
+        </Link>
+        <Link className="dashboardSideButton" href="/admin/managelistings">
+          <House size={16} />
+          Manage Listings
         </Link>
       </aside>
       <div className="w-4/5">{children}</div>

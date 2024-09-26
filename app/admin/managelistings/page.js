@@ -1,6 +1,5 @@
 import ListActions from '@/app/_components/ListActions';
-import { deleteAgent, getAgents } from '@/app/_lib/actions';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { deleteProperty, getAgents, getProperties } from '@/app/_lib/actions';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -20,9 +19,9 @@ import {
 } from '@/components/ui/table';
 import Link from 'next/link';
 
-export default async function EditAgents() {
+export default async function manageListings() {
+  const properties = await getProperties();
   const agents = await getAgents();
-
   return (
     <div className="flex w-full flex-col gap-6 px-4 pb-10 pt-6 md:max-w-6xl lg:mx-auto">
       <Breadcrumb>
@@ -36,39 +35,36 @@ export default async function EditAgents() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Manage Agents</BreadcrumbPage>
+            <BreadcrumbPage>Manage Listings</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <h2 className="font-semibold">Manage agents</h2>
+      <h2 className="font-semibold">Manage listings</h2>
       <div>
         <Table>
-          <TableCaption>List of Agents</TableCaption>
+          <TableCaption>List of Properties</TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead>Id</TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead>Email</TableHead>
+              <TableHead>City</TableHead>
+              <TableHead>Address</TableHead>
               <TableHead></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {agents.map((agent) => (
-              <TableRow key={agent.id}>
-                <TableCell>{agent.id}</TableCell>
+            {properties.map((property) => (
+              <TableRow key={property.id}>
+                <TableCell>{property.id}</TableCell>
                 <TableCell className="flex items-center gap-2">
-                  <Avatar>
-                    <AvatarImage src={agent.image} alt="agent image" />
-                    <AvatarFallback>Avatar</AvatarFallback>
-                  </Avatar>
-                  {agent.name}
+                  {property.city}
                 </TableCell>
-                <TableCell>{agent.email}</TableCell>
+                <TableCell>{property.address}</TableCell>
                 <TableCell>
                   <ListActions
-                    item={agent}
-                    deleteHandler={deleteAgent}
-                    desc="agent"
+                    item={property}
+                    deleteHandler={deleteProperty}
+                    desc="property"
+                    agents={agents}
                   />
                 </TableCell>
               </TableRow>

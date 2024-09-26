@@ -9,10 +9,12 @@ import {
 import { Ellipsis, Pencil, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import DeleteAgentDialog from './DeleteAgentDialog';
-import ModalComponent from './Modal';
+import DeleteDialog from './DeleteDialog';
+import ModalComponent from './ModalAgent';
+import ModalAgent from './ModalAgent';
+import ModalProp from './ModalProp';
 
-export default function AgentActions({ agent, deleteAgent }) {
+export default function ListActions({ agents, item, deleteHandler, desc }) {
   const [open, setOpen] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -22,8 +24,8 @@ export default function AgentActions({ agent, deleteAgent }) {
   const handleClose = () => setOpen(false);
 
   const handleDelete = () => {
-    deleteAgent(agent.id);
-    toast.success('Agent deleted');
+    deleteHandler(item.id);
+    toast.success(`${desc.toUpperCase()} deleted`);
   };
 
   return (
@@ -45,13 +47,23 @@ export default function AgentActions({ agent, deleteAgent }) {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <DeleteAgentDialog
+      <DeleteDialog
         open={dialogOpen}
         handleClose={handleCloseDialog}
         handleDelete={handleDelete}
+        property={desc}
       />
 
-      <ModalComponent agent={agent} open={open} handleClose={handleClose} />
+      {desc === 'agent' ? (
+        <ModalAgent agent={item} open={open} handleClose={handleClose} />
+      ) : (
+        <ModalProp
+          property={item}
+          open={open}
+          handleClose={handleClose}
+          agents={agents}
+        />
+      )}
     </>
   );
 }

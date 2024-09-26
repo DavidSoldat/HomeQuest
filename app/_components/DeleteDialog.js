@@ -1,4 +1,3 @@
-// components/DeleteAgentDialog.tsx
 import {
   AlertDialog,
   AlertDialogAction,
@@ -10,16 +9,22 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 
-const DeleteAgentDialog = ({ open, handleClose, handleDelete }) => {
+export default function DeleteDialog({
+  open,
+  handleClose,
+  handleDelete,
+  property,
+}) {
   return (
     <AlertDialog open={open} onOpenChange={handleClose}>
       <AlertDialogContent className="bg-white">
         <AlertDialogHeader>
           <AlertDialogTitle>
-            Are you sure you want to delete this agent?
+            Are you sure you want to delete this {property}?
           </AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone and will permanently delete the agent.
+            This action cannot be undone and will permanently delete the{' '}
+            {property}.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
@@ -46,6 +51,4 @@ const DeleteAgentDialog = ({ open, handleClose, handleDelete }) => {
       </AlertDialogContent>
     </AlertDialog>
   );
-};
-
-export default DeleteAgentDialog;
+}
