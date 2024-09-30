@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 import getSession from '../_lib/getSession';
-import { getAgents } from '../_lib/actions';
+import { getAgents, getProperties } from '../_lib/actions';
 
 export const metadata = {
   title: 'Admin Dashboard',
@@ -11,6 +11,7 @@ async function AdminDashboard() {
   const user = session?.user;
   if (!user) redirect('/signin');
   const agents = await getAgents();
+  const properties = await getProperties();
 
   if (user.role !== 'admin') {
     return (
@@ -22,7 +23,10 @@ async function AdminDashboard() {
 
   return (
     <div className="h-full w-full px-4 py-10 md:max-w-6xl lg:mx-auto">
-      <div className="h-full">Number of agents: {agents.length}</div>
+      <div className="flex h-full flex-col">
+        <p>Number of agents: {agents.length}</p>
+        <p>Number of properties: {properties.length}</p>
+      </div>
     </div>
   );
 }

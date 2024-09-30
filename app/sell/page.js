@@ -1,6 +1,6 @@
+import notFound from '@/public/not-found.jpeg';
 import Image from 'next/image';
 import Link from 'next/link';
-import notFound from '@/public/not-found.jpeg';
 
 export const metadata = {
   title: 'Sell',
