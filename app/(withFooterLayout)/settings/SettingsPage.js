@@ -8,13 +8,15 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useSession } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
-import { Button } from '../_components/Button';
-import { updateProfile } from '../_lib/actions';
-import { updateProfileSchema } from '../_lib/validations';
+
+import { updateProfile } from '../../_lib/actions';
+import { updateProfileSchema } from '../../_lib/validations';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/app/_components/Button';
 
 export default function SettingsPage({ user }) {
   const session = useSession();

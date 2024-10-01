@@ -18,7 +18,7 @@ export default function MapComponent() {
   );
 
   return (
-    <div className="h-full">
+    <div className="hidden h-full w-3/5 lg:block">
       <Map />
     </div>
   );

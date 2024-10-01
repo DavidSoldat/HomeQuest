@@ -1,9 +1,9 @@
 import '@/app/_styles/globals.css';
 import { SessionProvider } from 'next-auth/react';
 import { Inter } from 'next/font/google';
-import Footer from './_components/Footer';
-import Header from './_components/Header';
+
 import { Toaster } from 'react-hot-toast';
+import Header from '../_components/Header';
 
 const inter = Inter({ subsets: ['latin'], display: 'swap' });
 
@@ -20,13 +20,15 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} flex min-h-screen flex-col`}>
+    <html lang="en" className="h-full">
+      <body className={`${inter.className} flex h-full min-h-screen flex-col`}>
         <SessionProvider>
           <Header />
-          <main className="mx-0 flex w-full flex-1">{children}</main>
+
+          <main className="mx-0 flex min-h-0 w-full flex-1 overflow-hidden">
+            {children}
+          </main>
           <Toaster />
-          <Footer />
         </SessionProvider>
       </body>
     </html>

@@ -1,4 +1,4 @@
-import AgentsList from '../_components/AgentsList';
+import AgentsList from '../../_components/AgentsList';
 
 export const metadata = {
   title: 'Agents',

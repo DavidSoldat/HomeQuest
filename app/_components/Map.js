@@ -18,9 +18,7 @@ export default function MyMap() {
   };
 
   return (
-    // <div className="h-full w-3/5 overflow-hidden py-4">
-    <div className="flex h-full w-3/5 flex-col py-4">
-      {' '}
+    <div className="flex h-full flex-col gap-3">
       <SearchInput onSearch={handleSearchSubmit} />
       <MapContainer
         center={position}
@@ -29,8 +27,8 @@ export default function MyMap() {
         className="h-full w-full"
       >
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution="Google Maps"
+          url="https://www.google.cn/maps/vt?lyrs=m@189&gl=cn&x={x}&y={y}&z={z}"
         />
         <LeafletControlGeocoder
           submittedValue={submittedValue}

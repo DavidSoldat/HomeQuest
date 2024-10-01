@@ -1,11 +1,11 @@
-import { ChevronLeftIcon, ChevronRightIcon, StarIcon } from 'lucide-react';
-import Image from 'next/image';
-import Carousel from './Carousel';
 import prop1 from '@/assets/images/prop1.jpg';
 import prop2 from '@/assets/images/prop2.jpg';
 import prop3 from '@/assets/images/prop3.jpg';
+import { StarIcon } from 'lucide-react';
+import Image from 'next/image';
+import Carousel from './Carousel';
 
-const properties = [
+export const properties = [
   {
     price: '$2,700,000',
     beds: 2,

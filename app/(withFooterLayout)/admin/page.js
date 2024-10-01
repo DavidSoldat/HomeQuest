@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
-import getSession from '../_lib/getSession';
-import { getAgents, getProperties } from '../_lib/actions';
+import getSession from '../../_lib/getSession';
+import { getAgents, getProperties } from '../../_lib/actions';
 
 export const metadata = {
   title: 'Admin Dashboard',

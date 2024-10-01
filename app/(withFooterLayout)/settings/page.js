@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
-import getSession from '../_lib/getSession';
+import getSession from '../../_lib/getSession';
 import SettingsPage from './SettingsPage';
 
 export const metadata = {
