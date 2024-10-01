@@ -18,16 +18,14 @@ export default function PropertyCard({ property }) {
         </div>
 
         <div className="flex flex-1 flex-col justify-between p-4">
-          <p className="text-lg font-bold">{property.price}</p>
+          <p className="text-lg font-bold">{price}</p>
           <p className="text-gray-600">
-            <span className="font-bold">{property.beds}</span> bd |{' '}
-            <span className="font-bold">{property.baths}</span> ba |{' '}
-            <span className="font-bold">{property.sqft}</span> sqft |{' '}
-            {property.location}
+            <span className="font-bold">{baths}</span> ba |{' '}
+            <span className="font-bold">{sqft}</span> sqm | {location}
           </p>
           <div className="mt-2 flex items-center gap-1 text-sm">
             <span className="text-yellow-600">●</span>
-            <span className="font-bold">Sold</span> {property.soldDays} days ago
+            <span className="font-bold">Sold</span> {soldDays} days ago
           </div>
         </div>
       </div>
