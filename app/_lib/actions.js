@@ -145,6 +145,42 @@ export async function editAgent(values, agentId) {
   }
 }
 
+// export async function addProperty(values) {
+//   const {
+//     address,
+//     city,
+//     bedrooms,
+//     bathrooms,
+//     sqmeter,
+//     price,
+//     images,
+//     agentId,
+//     soldDate,
+//   } = values;
+
+//   try {
+//     await prisma.property.create({
+//       data: {
+//         address,
+//         bedrooms,
+//         bathrooms,
+//         sqmeter,
+//         city,
+//         price,
+//         images,
+//         agent: {
+//           connect: { id: agentId },
+//         },
+//         soldDate,
+//       },
+//     });
+//     console.log('Success');
+//     revalidatePath('/admin/managelistings');
+//   } catch (error) {
+//     throw new Error('Error adding property: ' + error.message);
+//   }
+// }
+
 export async function addProperty(values) {
   const {
     address,
@@ -156,6 +192,8 @@ export async function addProperty(values) {
     images,
     agentId,
     soldDate,
+    lat,
+    lng,
   } = values;
 
   try {
@@ -172,6 +210,8 @@ export async function addProperty(values) {
           connect: { id: agentId },
         },
         soldDate,
+        lat,
+        lng,
       },
     });
     console.log('Success');

@@ -15,12 +15,25 @@ export default function LeafletControlGeocoder({
 
   useEffect(() => {
     const geocoder = L.Control.Geocoder.nominatim();
+
     if (submittedValue) {
       geocoder.geocode(submittedValue, (results) => {
         if (results.length > 0) {
-          const latlng = results[0].center;
+          const result = results[0];
+
+          const latlng = result.center;
           setPosition(latlng);
-          map.setView(latlng, 13);
+
+          if (result.bbox) {
+            const bounds = [
+              [result.bbox.getSouthWest().lat, result.bbox.getSouthWest().lng],
+              [result.bbox.getNorthEast().lat, result.bbox.getNorthEast().lng],
+            ];
+
+            map.fitBounds(bounds);
+          } else {
+            map.setView(latlng, 13);
+          }
         } else {
           toast('⛔ Location not found. Try again');
         }

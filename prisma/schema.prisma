@@ -53,6 +53,8 @@ model Property {
   bathrooms String
   sqmeter   Float
   city      String
+  lat       String?
+  lng       String?
   price     Float
   images    String[]
   agent     Agent?   @relation(fields: [agentId], references: [id])

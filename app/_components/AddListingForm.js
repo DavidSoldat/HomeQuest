@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { addProperty } from '../_lib/actions';
@@ -25,10 +25,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import getLatLng from '../_lib/helpers';
 
 export default function AddListingForm({ agents }) {
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const fileInputRef = useRef(null);
 
   const handleFileChange = (e) => {
     const filesArray = Array.from(e.target.files);
@@ -46,17 +49,28 @@ export default function AddListingForm({ agents }) {
       uploadedImages.push(imageUrl);
     }
 
+    const { lat, lng } = await getLatLng(values.address, values.city);
+
     const newValues = {
       ...values,
       images: uploadedImages,
-      sqmeter: parseInt(values.sqmeter),
-      price: parseInt(values.price),
+      sqmeter: parseInt(values.sqmeter, 10),
+      price: parseInt(values.price, 10),
+      lat,
+      lng,
     };
+
+    console.log(newValues);
 
     try {
       await addPropertySchema.parseAsync(newValues);
       await addProperty(newValues);
       toast.success('New listing added');
+
+      form.reset();
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
     } catch (error) {
       console.error('Validation errors:', error);
       if (error instanceof z.ZodError) {
@@ -124,10 +138,7 @@ export default function AddListingForm({ agents }) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Bedrooms</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
+                <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Bd" />
@@ -182,10 +193,7 @@ export default function AddListingForm({ agents }) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Bathrooms</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
+                <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Ba" />
@@ -273,6 +281,8 @@ export default function AddListingForm({ agents }) {
                   type="file"
                   multiple
                   onChange={handleFileChange}
+                  ref={fileInputRef}
+                  className="cursor-pointer"
                 />
               </FormControl>
               <FormMessage />
@@ -286,10 +296,7 @@ export default function AddListingForm({ agents }) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Agent</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
+                <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Select Agent" />
