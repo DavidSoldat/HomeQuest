@@ -6,7 +6,7 @@ import {
   PrevButton,
   usePrevNextButtons,
 } from './EmblaCarouselArrowButtons';
-import PropertyCard from './PropertyCard';
+import PropertyCard from './SoldPropertyCard';
 
 export default function Carousel({ slides, OPTIONS }) {
   const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS);

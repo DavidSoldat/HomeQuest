@@ -20,14 +20,13 @@ export default function SearchInput({ onSearch }) {
   return (
     <form onSubmit={handleSubmit} className="relative w-full pl-3">
       <input
-        // type="search"
         id="mapSearch"
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
         placeholder="Search here..."
         className="w-full rounded-md border border-gray-300 p-2"
       />
-      <div className="bg-red absolute right-4 top-1/2 flex -translate-y-1/2 items-center">
+      <div className="bg-red absolute right-2 top-1/2 flex -translate-y-1/2 items-center">
         <button
           type="button"
           className={`p-1 hover:bg-gray-100 ${searchValue ? 'block' : 'hidden'}`}

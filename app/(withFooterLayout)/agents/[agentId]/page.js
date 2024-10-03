@@ -15,6 +15,7 @@ export async function generateStaticParams() {
   }));
   return ids;
 }
+
 export default async function Page({ params }) {
   const agent = await getAgent(params.agentId);
   return (

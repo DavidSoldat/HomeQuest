@@ -3,15 +3,30 @@
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 import 'leaflet/dist/leaflet.css';
-import { MapContainer, TileLayer } from 'react-leaflet';
-import SearchInput from './SearchInput';
 import { useState } from 'react';
+import { MapContainer, Marker, TileLayer } from 'react-leaflet';
+import SearchInput from './SearchInput';
 
 import LeafletControlGeocoder from './Geocoder';
+import { formatPrice } from '../_lib/helpers';
 
-export default function MyMap() {
+export default function MyMap({ properties }) {
   const [position, setPosition] = useState([44.7716, 17.1988]);
   const [submittedValue, setSubmittedValue] = useState('');
+
+  const createPriceMarker = (price, propertyId) => {
+    return L.divIcon({
+      className: 'custom-marker',
+      html: `<a href='/buy/${propertyId}' style='width: fit-content' class="property-pill">
+      <div class='pill-text'>
+        ${price}
+      </div>
+
+            </a>`,
+      iconSize: [45, 19],
+      iconAnchor: [22.5, 19],
+    });
+  };
 
   const handleSearchSubmit = (query) => {
     setSubmittedValue(query);
@@ -34,6 +49,15 @@ export default function MyMap() {
           submittedValue={submittedValue}
           setPosition={setPosition}
         />
+        {properties.properties.map((property) => {
+          return (
+            <Marker
+              key={property.id}
+              position={[property.lat, property.lng]}
+              icon={createPriceMarker(formatPrice(property.price), property.id)}
+            />
+          );
+        })}
       </MapContainer>
     </div>
   );

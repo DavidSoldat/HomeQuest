@@ -18,3 +18,42 @@ export default async function getLatLng(address, city) {
     console.error('Error fetching data:', error);
   }
 }
+
+export function formatPrice(amount) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(amount);
+}
+
+export function convertNumber(word) {
+  const numberMap = {
+    zero: '0',
+    one: '1',
+    two: '2',
+    three: '3',
+    four: '4',
+    fiveOrMore: '5+',
+  };
+
+  return numberMap[word];
+}
+
+export function calculateDays(date) {
+  const targetDate = new Date(date);
+
+  const today = new Date();
+
+  targetDate.setHours(0, 0, 0, 0);
+  today.setHours(0, 0, 0, 0);
+
+  const timeDifference = targetDate - today;
+
+  const daysDifference = Math.abs(
+    Math.ceil(timeDifference / (1000 * 60 * 60 * 24)),
+  );
+
+  return daysDifference;
+}

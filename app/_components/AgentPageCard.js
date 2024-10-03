@@ -1,69 +1,11 @@
-import prop1 from '@/assets/images/prop1.jpg';
-import prop2 from '@/assets/images/prop2.jpg';
-import prop3 from '@/assets/images/prop3.jpg';
 import { StarIcon } from 'lucide-react';
 import Image from 'next/image';
+import { getProperties } from '../_lib/actions';
 import Carousel from './Carousel';
 
-export const properties = [
-  {
-    price: '$2,700,000',
-    beds: 2,
-    baths: 3,
-    sqft: 1331,
-    location: 'New York, NY',
-    soldDays: 4,
-    src: prop1,
-  },
-  {
-    price: '$415,000',
-    beds: 1,
-    baths: 1,
-    sqft: 0,
-    location: 'Brooklyn, NY',
-    soldDays: 12,
-    src: prop2,
-  },
-  {
-    price: '$635,000',
-    beds: 2,
-    baths: 1,
-    sqft: 950,
-    location: 'Manhattan, NY',
-    soldDays: 13,
-    src: prop3,
-  },
-  {
-    price: '$2,700,000',
-    beds: 2,
-    baths: 3,
-    sqft: 1331,
-    location: 'New York, NY',
-    soldDays: 4,
-    src: prop1,
-  },
-  {
-    price: '$415,000',
-    beds: 1,
-    baths: 1,
-    sqft: 0,
-    location: 'Brooklyn, NY',
-    soldDays: 12,
-    src: prop2,
-  },
-  {
-    price: '$635,000',
-    beds: 2,
-    baths: 1,
-    sqft: 950,
-    location: 'Manhattan, NY',
-    soldDays: 13,
-    src: prop3,
-  },
-];
-
-export default function AgentPageCard({ agent }) {
+export default async function AgentPageCard({ agent }) {
   const OPTIONS = { align: 'start' };
+  const properties = await getProperties();
   return (
     <div className="boxShadow flex rounded-md border border-gray-200 p-5">
       <div className="flex w-full flex-col p-3 lg:flex-row">

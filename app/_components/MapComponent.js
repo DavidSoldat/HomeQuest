@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import { useMemo } from 'react';
 import { PropagateLoader } from 'react-spinners';
 
-export default function MapComponent() {
+export default function MapComponent(properties) {
   const Map = useMemo(
     () =>
       dynamic(() => import('@/app/_components/Map'), {
@@ -19,7 +19,7 @@ export default function MapComponent() {
 
   return (
     <div className="hidden h-full w-3/5 lg:block">
-      <Map />
+      <Map properties={properties} />
     </div>
   );
 }

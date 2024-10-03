@@ -145,42 +145,6 @@ export async function editAgent(values, agentId) {
   }
 }
 
-// export async function addProperty(values) {
-//   const {
-//     address,
-//     city,
-//     bedrooms,
-//     bathrooms,
-//     sqmeter,
-//     price,
-//     images,
-//     agentId,
-//     soldDate,
-//   } = values;
-
-//   try {
-//     await prisma.property.create({
-//       data: {
-//         address,
-//         bedrooms,
-//         bathrooms,
-//         sqmeter,
-//         city,
-//         price,
-//         images,
-//         agent: {
-//           connect: { id: agentId },
-//         },
-//         soldDate,
-//       },
-//     });
-//     console.log('Success');
-//     revalidatePath('/admin/managelistings');
-//   } catch (error) {
-//     throw new Error('Error adding property: ' + error.message);
-//   }
-// }
-
 export async function addProperty(values) {
   const {
     address,
@@ -221,13 +185,25 @@ export async function addProperty(values) {
   }
 }
 
-export const getProperties = unstable_cache(async () => {
+export async function getProperties() {
   try {
     return await prisma.property.findMany();
   } catch (error) {
-    throw new Error('Error fetching agents: ' + error.message);
+    throw new Error('Error fetching properties: ' + error.message);
   }
-});
+}
+
+export const getProperty = async (propertyId) => {
+  try {
+    return await prisma.property.findUnique({
+      where: {
+        id: propertyId,
+      },
+    });
+  } catch (error) {
+    throw new Error('Error fetching property: ' + error.message);
+  }
+};
 
 export async function deleteProperty(propertyId) {
   try {
