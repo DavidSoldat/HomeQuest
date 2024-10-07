@@ -23,7 +23,7 @@ export default function SoldPropertyCard({ property }) {
         <div className="relative flex-shrink-0">
           <Image
             src={firstImageUrl}
-            alt={`Property - ${address}`} // Better alt text
+            alt={`Property - ${address}`}
             width={600}
             height={400}
             className="h-48 w-full object-cover"

@@ -5,10 +5,9 @@ import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import 'leaflet/dist/leaflet.css';
 import { useState } from 'react';
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
-import SearchInput from './SearchInput';
-
-import LeafletControlGeocoder from './Geocoder';
 import { formatPrice } from '../_lib/helpers';
+import LeafletControlGeocoder from './Geocoder';
+import SearchInput from './SearchInput';
 
 export default function MyMap({ properties }) {
   const [position, setPosition] = useState([44.7716, 17.1988]);
@@ -17,12 +16,10 @@ export default function MyMap({ properties }) {
   const createPriceMarker = (price, propertyId) => {
     return L.divIcon({
       className: 'custom-marker',
-      html: `<a href='/buy/${propertyId}' style='width: fit-content' class="property-pill">
+      html: `<a href='/buy/${propertyId}'  class="property-pill">
       <div class='pill-text'>
         ${price}
-      </div>
-
-            </a>`,
+      </div></a>`,
       iconSize: [45, 19],
       iconAnchor: [22.5, 19],
     });
