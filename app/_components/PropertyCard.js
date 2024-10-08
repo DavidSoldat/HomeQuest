@@ -21,7 +21,7 @@ export default async function PropertyCard({ property }) {
   const firstImageUrl =
     images && images.length > 0 ? images[0] : '/path/to/default/image.jpg';
   return (
-    <Link href="/" className="block">
+    <Link href={`/buy/${property.id}`} className="block">
       <div className="agentProfile flex min-w-0 flex-col overflow-hidden rounded-md border">
         <div className="relative flex-shrink-0">
           <Image
