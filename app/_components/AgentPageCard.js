@@ -6,6 +6,7 @@ import Carousel from './Carousel';
 export default async function AgentPageCard({ agent }) {
   const OPTIONS = { align: 'start' };
   const properties = await getAgentsProperties(agent.id);
+  console.log(properties);
   return (
     <div className="flex rounded-md border border-gray-200 p-5">
       <div className="flex w-full flex-col gap-5 p-3 md:gap-0 lg:flex-row">
@@ -40,7 +41,15 @@ export default async function AgentPageCard({ agent }) {
           </div>
         </div>
         <div className="relative flex-1">
-          <Carousel slides={properties} options={OPTIONS} />
+          {properties.length > 0 ? (
+            <Carousel slides={properties} options={OPTIONS} />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center md:my-3 lg:my-0">
+              <p className="text-xl font-semibold">
+                No recently sold properties
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>
