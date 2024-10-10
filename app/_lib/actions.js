@@ -47,8 +47,17 @@ export async function addAgent(values) {
 
   if (!user) throw new Error('Unauthorized');
 
-  const { name, email, image, company, type, rating, rangeLower, rangeUpper } =
-    addAgentSchema.parse(values);
+  const {
+    name,
+    email,
+    image,
+    bio,
+    company,
+    type,
+    rating,
+    rangeLower,
+    rangeUpper,
+  } = addAgentSchema.parse(values);
 
   try {
     await prisma.agent.create({
@@ -59,6 +68,7 @@ export async function addAgent(values) {
         company,
         type,
         rating,
+        bio,
         rangeLower,
         rangeUpper,
       },
@@ -202,6 +212,26 @@ export const getProperty = async (propertyId) => {
     });
   } catch (error) {
     throw new Error('Error fetching property: ' + error.message);
+  }
+};
+
+export const getAgentsProperties = async (agentId) => {
+  console.log(agentId);
+  try {
+    const properties = await prisma.property.findMany({
+      where: {
+        agentId: agentId,
+      },
+    });
+
+    if (!properties.length) {
+      return [];
+    }
+
+    return properties;
+  } catch (error) {
+    console.error('Error fetching properties:', error);
+    throw new Error('Error fetching properties: ' + error.message);
   }
 };
 

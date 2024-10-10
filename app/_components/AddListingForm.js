@@ -60,8 +60,6 @@ export default function AddListingForm({ agents }) {
       lng,
     };
 
-    console.log(newValues);
-
     try {
       await addPropertySchema.parseAsync(newValues);
       await addProperty(newValues);

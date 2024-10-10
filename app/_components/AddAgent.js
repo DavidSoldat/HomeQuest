@@ -15,7 +15,7 @@ import { useForm } from 'react-hook-form';
 import { addAgent } from '../_lib/actions';
 import { uploadFile } from '../_lib/storage';
 import { addAgentSchema } from '../_lib/validations';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 
 import {
@@ -25,10 +25,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 
 export default function AddAgent() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const fileInputRef = useRef(null);
 
   async function onSubmit(values) {
     setIsLoading(true);
@@ -47,6 +49,10 @@ export default function AddAgent() {
     try {
       await addAgent(newValues);
       toast.success('New agent added');
+      form.reset();
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
     } catch (error) {
       console.log(error);
       throw error;
@@ -61,7 +67,9 @@ export default function AddAgent() {
       name: '',
       email: '',
       image: '',
+      company: '',
       type: '',
+      bio: '',
       rating: 0,
       rangeLower: 0,
       rangeUpper: 0,
@@ -108,6 +116,8 @@ export default function AddAgent() {
                   placeholder="image"
                   type="file"
                   onChange={(e) => setSelectedFile(e.target.files[0])}
+                  ref={fileInputRef}
+                  className="cursor-pointer"
                 />
               </FormControl>
               <FormMessage />
@@ -115,7 +125,7 @@ export default function AddAgent() {
           )}
         />
 
-        <div className="flex w-full space-x-8">
+        <div className="flex w-full space-x-10">
           <FormField
             control={form.control}
             name="company"
@@ -217,6 +227,23 @@ export default function AddAgent() {
           />
         </div>
 
+        <FormField
+          control={form.control}
+          name="bio"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Bio</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="Tell us a little bit about agent"
+                  className="resize-none"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <Button className="bg-blue-600 text-white" type="submit">
           {isLoading ? 'Adding Agent...' : 'Add agent'}
         </Button>

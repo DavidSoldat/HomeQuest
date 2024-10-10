@@ -41,6 +41,7 @@ model Agent {
   rating     Float
   rangeLower Int
   rangeUpper Int
+  bio        String
   properties Property[]
 
   @@map("agents")

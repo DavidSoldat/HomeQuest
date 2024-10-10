@@ -21,9 +21,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 
 export default function ModalAgent({ agent, open, handleClose }) {
-  const { name, email, type, rating, company, rangeLower, rangeUpper } = agent;
+  const { name, email, type, rating, bio, company, rangeLower, rangeUpper } =
+    agent;
   const form = useForm({
     resolver: zodResolver(editAgentSchema),
     defaultValues: {
@@ -31,6 +33,7 @@ export default function ModalAgent({ agent, open, handleClose }) {
       email: email,
       type: type,
       company: company,
+      bio: bio,
       rating: rating,
       rangeLower: rangeLower,
       rangeUpper: rangeUpper,
@@ -192,6 +195,23 @@ export default function ModalAgent({ agent, open, handleClose }) {
                     )}
                   />
                 </div>
+                <FormField
+                  control={form.control}
+                  name="bio"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Bio</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Tell us a little bit about agent"
+                          className="resize-none"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 <div className="flex justify-between">
                   <Button className="bg-blue-600 text-white" type="submit">
                     Edit Agent

@@ -1,14 +1,14 @@
 import { StarIcon } from 'lucide-react';
 import Image from 'next/image';
-import { getProperties } from '../_lib/actions';
+import { getAgentsProperties } from '../_lib/actions';
 import Carousel from './Carousel';
 
 export default async function AgentPageCard({ agent }) {
   const OPTIONS = { align: 'start' };
-  const properties = await getProperties();
+  const properties = await getAgentsProperties(agent.id);
   return (
-    <div className="boxShadow flex rounded-md border border-gray-200 p-5">
-      <div className="flex w-full flex-col p-3 lg:flex-row">
+    <div className="flex rounded-md border border-gray-200 p-5">
+      <div className="flex w-full flex-col gap-5 p-3 md:gap-0 lg:flex-row">
         <div className="mx-10 mt-3 flex flex-col items-center gap-4">
           <div className="block">
             <div className="relative aspect-square h-40 w-40">

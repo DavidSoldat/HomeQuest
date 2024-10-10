@@ -2,6 +2,7 @@ import { StarIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getAgents } from '../_lib/actions';
+import { formatNumber, formatPrice } from '../_lib/helpers';
 
 export default async function AgentsList() {
   const agents = await getAgents();
@@ -47,7 +48,8 @@ export default async function AgentsList() {
                 <div>
                   <p className="text-gray-500">
                     <span className="font-bold text-gray-900">
-                      €{agent.rangeLower}K - €{agent.rangeUpper}K
+                      {formatNumber(agent.rangeLower)} -{' '}
+                      {formatNumber(agent.rangeUpper)}
                     </span>{' '}
                     team price range
                   </p>

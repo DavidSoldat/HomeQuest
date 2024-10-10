@@ -19,8 +19,12 @@ export const addAgentSchema = z
     image: z.string(),
     type: z.enum(['team', 'agent']),
     rating: z.preprocess((val) => Number(val), z.number().min(1).max(5)),
+    company: z.string().min(2, { message: 'Please enter a company name' }),
     rangeLower: z.preprocess((val) => Number(val), z.number()),
     rangeUpper: z.preprocess((val) => Number(val), z.number()),
+    bio: z
+      .string()
+      .min(5, { message: 'Bio must be at least 5 characters long' }),
   })
   .refine((data) => data.rangeLower < data.rangeUpper, {
     message: 'Lower price must be smaller than upper price',
@@ -36,7 +40,11 @@ export const editAgentSchema = z
     type: z.enum(['team', 'agent']),
     rating: z.preprocess((val) => Number(val), z.number().min(1).max(5)),
     rangeLower: z.preprocess((val) => Number(val), z.number()),
+    company: z.string().min(2, { message: 'Please enter a company name' }),
     rangeUpper: z.preprocess((val) => Number(val), z.number()),
+    bio: z
+      .string()
+      .min(5, { message: 'Bio must be at least 5 characters long' }),
   })
   .refine((data) => data.rangeLower < data.rangeUpper, {
     message: 'Lower price must be smaller than upper price',
