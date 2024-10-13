@@ -101,3 +101,11 @@ export const editPropertySchema = z.object({
   agentId: z.string(),
   soldDate: z.string().optional(),
 });
+
+export const ContactFormSchema = z.object({
+  name: z
+    .string()
+    .min(3, { message: 'Name must be at lest 3 characters long' }),
+  email: z.string().email({ message: 'Input valid email' }),
+  message: z.string().optional(),
+});

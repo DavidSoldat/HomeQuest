@@ -17,7 +17,6 @@ import { LoginFormSchema } from '../_lib/validations';
 export default function SignInForm() {
   const form = useForm({
     resolver: zodResolver(LoginFormSchema),
-    // TODO: Add default value from current user
     defaultValues: { email: '' },
   });
 

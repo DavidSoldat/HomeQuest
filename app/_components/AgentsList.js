@@ -21,6 +21,7 @@ export default async function AgentsList() {
                   <Image
                     src={agent.image}
                     fill
+                    priority
                     alt="agent avatar"
                     className="rounded-full object-cover"
                     sizes="100%"

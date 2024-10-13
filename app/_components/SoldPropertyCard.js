@@ -30,14 +30,14 @@ export default function SoldPropertyCard({ property }) {
           />
         </div>
 
-        <div className="flex flex-1 flex-col justify-between p-4">
+        <div className="flex flex-1 flex-col justify-between p-2 px-3">
           <p className="text-lg font-bold">{formatPrice(price)}</p>
           <p className="text-gray-600">
             <span className="font-bold">{convertNumber(bedrooms)}</span> bds |{' '}
             <span className="font-bold">{convertNumber(bathrooms)}</span> ba |{' '}
             <span className="font-bold">{sqmeter}</span> sqm | {city}
           </p>
-          <div className="mt-2 flex items-center gap-1 text-sm">
+          <div className="mt-1 flex items-center gap-1 text-sm">
             <span className="text-yellow-600">●</span>
             <span className="font-bold">Sold</span> {calculateDays(soldDate)}{' '}
             days ago

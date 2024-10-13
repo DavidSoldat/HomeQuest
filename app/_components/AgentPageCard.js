@@ -6,11 +6,11 @@ import Carousel from './Carousel';
 export default async function AgentPageCard({ agent }) {
   const OPTIONS = { align: 'start' };
   const properties = await getAgentsProperties(agent.id);
-  console.log(properties);
+
   return (
     <div className="flex rounded-md border border-gray-200 p-5">
-      <div className="flex w-full flex-col gap-5 p-3 md:gap-0 lg:flex-row">
-        <div className="mx-10 mt-3 flex flex-col items-center gap-4">
+      <div className="flex w-full flex-col gap-5 md:gap-0 lg:flex-row">
+        <div className="mx-10 mt-8 flex flex-col items-center gap-4">
           <div className="block">
             <div className="relative aspect-square h-40 w-40">
               <Image
@@ -25,10 +25,15 @@ export default async function AgentPageCard({ agent }) {
           <div className="flex flex-col items-center gap-4">
             <h2 className="text-2xl font-semibold">{agent.name}</h2>
             <div className="flex w-full flex-col items-center">
-              <p className="font-medium">{agent.company}</p>
-              <p className="text-gray-700">{agent.email}</p>
+              <p className="font-normal uppercase">{agent.company}</p>
+              <a
+                href={`mailto: ${agent.email}`}
+                className="text-blue-800 hover:underline"
+              >
+                {agent.email}
+              </a>
             </div>
-            <div className="flex gap-2">
+            <div className="mt-2 flex gap-3">
               <span className="rounded-md bg-blue-100 px-1 py-0.5 text-xs font-medium uppercase">
                 {agent.type}
               </span>
@@ -42,7 +47,7 @@ export default async function AgentPageCard({ agent }) {
         </div>
         <div className="relative flex-1">
           {properties.length > 0 ? (
-            <Carousel slides={properties} options={OPTIONS} />
+            <Carousel slides={properties} options={OPTIONS} agent={agent} />
           ) : (
             <div className="flex h-full w-full items-center justify-center md:my-3 lg:my-0">
               <p className="text-xl font-semibold">

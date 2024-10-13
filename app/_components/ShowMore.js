@@ -9,7 +9,7 @@ const ShowMore = ({ text, maxLength }) => {
   };
 
   return (
-    <p>
+    <p className="text-gray-700">
       {showMore ? (
         <>
           {text}{' '}

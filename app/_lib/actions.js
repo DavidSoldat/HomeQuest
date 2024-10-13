@@ -124,6 +124,9 @@ export const getAgent = async (agentId) => {
       where: {
         id: agentId,
       },
+      include: {
+        properties: true,
+      },
     });
   } catch (error) {
     throw new Error('Error fetching agents: ' + error.message);
