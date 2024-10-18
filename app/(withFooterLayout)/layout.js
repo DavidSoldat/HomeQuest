@@ -1,7 +1,7 @@
 import '@/app/_styles/globals.css';
 import { SessionProvider } from 'next-auth/react';
 import { Inter } from 'next/font/google';
-
+import { Analytics } from '@vercel/analytics/react';
 import { Toaster } from 'react-hot-toast';
 import Header from '../_components/Header';
 import Footer from '../_components/Footer';
@@ -28,6 +28,7 @@ export default function RootLayout({ children }) {
           <main className="mx-0 flex w-full flex-1">{children}</main>
           <Toaster />
           <Footer />
+          <Analytics />
         </SessionProvider>
       </body>
     </html>

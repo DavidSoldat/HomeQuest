@@ -3,10 +3,9 @@ import Link from 'next/link';
 import { convertNumber, formatPrice } from '../_lib/helpers';
 
 export default function PropertyPopover({ property }) {
-  console.log(property);
   return (
     <div className="popover-content">
-      <Link href={`/buy/${property.id}`}>
+      <Link href={`/buy/${property.id}`} passHref>
         <div className="agentProfile flex min-w-0 flex-col overflow-hidden rounded-md border">
           <div className="relative flex-shrink-0">
             <Image

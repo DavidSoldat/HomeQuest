@@ -10,7 +10,6 @@ import { Ellipsis, Pencil, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import DeleteDialog from './DeleteDialog';
-import ModalComponent from './ModalAgent';
 import ModalAgent from './ModalAgent';
 import ModalProp from './ModalProp';
 

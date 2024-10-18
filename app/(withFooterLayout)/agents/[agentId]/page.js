@@ -73,7 +73,7 @@ export default async function Page({ params }) {
             <Table>
               <TableCaption>Sold properits</TableCaption>
               <TableHeader>
-                <TableRow>
+                <TableRow className="font-semibold">
                   <TableHead>Address</TableHead>
                   <TableHead>Sold Date</TableHead>
                   <TableHead>Closing Price</TableHead>
@@ -88,7 +88,7 @@ export default async function Page({ params }) {
                         href={`/buy/${property.id}`}
                         className="flex items-center gap-3 text-blue-800 hover:underline"
                       >
-                        <div className="relative h-14 w-14">
+                        <div className="relative h-12 w-16">
                           <Image
                             fill
                             src={property.images[0]}

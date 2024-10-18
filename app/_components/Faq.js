@@ -47,7 +47,7 @@ function Faq() {
   ];
 
   return (
-    <div className="px-4 py-12 md:max-w-6xl lg:mx-auto">
+    <div className="px-4 py-12 lg:mx-auto">
       <header className="mb-7 flex flex-col gap-3">
         <h2 className="text-primary-darkGray text-5xl font-semibold">
           Frequently Asked Questions

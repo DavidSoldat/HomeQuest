@@ -209,3 +209,25 @@ input[type='search'].dark::-webkit-search-cancel-button {
 .leaflet-container .custom-marker a {
   color: white;
 }
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 8px;
+}
+.main-image {
+  grid-area: 1 / 1 / 3 / 3;
+  grid-column: span 2;
+}
+.second-image {
+  grid-area: 1 / 3 / 2 / 4;
+}
+.third-image {
+  grid-area: 1 / 4 / 2 / 5;
+}
+.fourth-image {
+  grid-area: 2 / 3 / 3 / 4;
+}
+.fifth-image {
+  grid-area: 2 / 4 / 3 / 5;
+}
