@@ -1,12 +1,35 @@
+'use client';
+
 import Image from 'next/image';
 import { convertNumber, formatPrice } from '../_lib/helpers';
 import { Button } from '@/components/ui/button';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.css';
 
 export default function PropertyPage({ property }) {
   const firstImage = property.images[0];
+
   return (
     <div className="flex w-full flex-col gap-5 px-5">
-      <div className="photo-grid grid h-[440px] grid-cols-4 grid-rows-2 gap-2 overflow-hidden rounded-lg">
+      <div className="block md:hidden">
+        <Swiper spaceBetween={10} slidesPerView={1} className="h-full">
+          {property.images.map((image, i) => (
+            <SwiperSlide key={i} className="w-full">
+              <div className="relative aspect-square w-full">
+                <Image
+                  alt="Property image"
+                  src={image}
+                  fill
+                  priority
+                  className="object-cover"
+                />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+
+      <div className="hidden h-[440px] grid-cols-4 grid-rows-2 gap-2 overflow-hidden rounded-lg md:grid">
         <div className="relative col-span-2 row-span-2 h-full">
           <Image
             alt="Property image"
@@ -28,9 +51,10 @@ export default function PropertyPage({ property }) {
           </div>
         ))}
       </div>
+
       <div className="flex w-full gap-5">
         <div className="flex w-[70%] flex-col gap-5">
-          <div className="flex justify-between border-b border-gray-300 pb-5">
+          <div className="flex justify-between border-b border-solid border-[#D1D1D5] pb-5">
             <div className="flex flex-col">
               <span className="text-3xl font-bold text-gray-800">
                 {formatPrice(property.price)}
@@ -88,11 +112,10 @@ export default function PropertyPage({ property }) {
         </div>
         <div className="flex h-fit w-1/3">
           <div className="contactProperty sticky top-10 flex w-full flex-col items-center justify-center gap-5 p-5">
-            <button className="!important flex w-full flex-col items-center justify-center rounded-md border bg-blue-600 px-4 py-2 text-base font-bold text-white hover:bg-blue-700">
+            <button className="flex w-full flex-col items-center justify-center rounded-md border bg-blue-600 px-4 py-2 text-base font-bold text-white hover:bg-blue-700">
               <span>Request a tour</span>
               <p className="text-xs font-light">as early as Monday!</p>
             </button>
-
             <Button className="w-full border border-blue-600 px-4 py-2 text-base font-bold text-blue-600 hover:border-blue-700 hover:text-blue-700">
               Message
             </Button>

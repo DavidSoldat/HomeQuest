@@ -50,7 +50,7 @@ export default function ListingModal({ children }) {
       <DialogOverlay>
         <DialogContent
           aria-describedby={undefined}
-          className="flex h-screen flex-col gap-0 overflow-y-scroll !rounded-none bg-white p-0 md:max-w-6xl lg:mx-auto [&>button]:hidden"
+          className="flex h-screen w-screen flex-col gap-0 overflow-y-scroll !rounded-none bg-white p-0 md:max-w-6xl lg:mx-auto [&>button]:hidden"
         >
           <DialogTitle>
             <VisuallyHidden>Property</VisuallyHidden>

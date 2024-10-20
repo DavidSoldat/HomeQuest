@@ -672,7 +672,7 @@ export default function AddListingForm({ agents }) {
             name="soldDate"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>Date of birth</FormLabel>
+                <FormLabel>Sold </FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>

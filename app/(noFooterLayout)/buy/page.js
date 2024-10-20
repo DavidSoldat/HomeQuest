@@ -1,9 +1,7 @@
-import { properties } from '@/app/_components/AgentPageCard';
+import PropertyCard from '@/app/_components/PropertyCard';
 import SearchInput from '@/app/_components/SearchInput';
-import SoldPropertyCard from '@/app/_components/SoldPropertyCard';
 import { getProperties } from '@/app/_lib/actions';
 import MapComponent from '../../_components/MapComponent';
-import PropertyCard from '@/app/_components/PropertyCard';
 
 export const metadata = {
   title: 'Buy',

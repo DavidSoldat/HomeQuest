@@ -1,8 +1,9 @@
-import Image from 'next/image';
 import Link from 'next/link';
+import 'swiper/swiper-bundle.css';
 import { getAgent } from '../_lib/actions';
 import { convertNumber, formatPrice } from '../_lib/helpers';
 import CardActions from './CardActions';
+import ClientCarousel from './ImageSwiper';
 
 export default async function PropertyCard({ property }) {
   const {
@@ -18,19 +19,11 @@ export default async function PropertyCard({ property }) {
 
   const { name: agentName } = await getAgent(agentId);
 
-  const firstImageUrl =
-    images && images.length > 0 ? images[0] : '/path/to/default/image.jpg';
   return (
     <Link href={`/buy/${property.id}`} className="block">
       <div className="agentProfile flex min-w-0 flex-col overflow-hidden rounded-md border">
         <div className="relative flex-shrink-0">
-          <Image
-            src={firstImageUrl}
-            alt={`Property - ${address}`}
-            width={600}
-            height={400}
-            className="h-48 w-full object-cover"
-          />
+          <ClientCarousel images={images} />
         </div>
 
         <div className="flex flex-1 flex-col justify-between p-2">
