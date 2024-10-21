@@ -1,3 +1,4 @@
+import BackButton from '@/app/_components/BackButton';
 import PropertyPage from '@/app/_components/PropertyPage';
 import { getProperty } from '@/app/_lib/actions';
 
@@ -12,8 +13,11 @@ export default async function Page({ params: { propertyId } }) {
   const property = await getProperty(propertyId);
 
   return (
-    <div className="h-full px-4 py-10 md:max-w-6xl lg:mx-auto">
-      <PropertyPage property={property} />
+    <div className="h-full w-full overflow-y-scroll">
+      <div className="px-4 py-3 md:max-w-6xl lg:mx-auto">
+        <BackButton />
+        <PropertyPage property={property} />
+      </div>
     </div>
   );
 }

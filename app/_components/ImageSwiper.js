@@ -11,7 +11,7 @@ const NextArrow = ({ onClick }) => {
   return (
     <div
       onClick={onClick}
-      className="absolute right-4 top-1/2 z-10 -translate-y-1/2 transform cursor-pointer rounded-full p-2 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+      className="absolute right-2 top-1/2 z-10 -translate-y-1/2 transform cursor-pointer rounded-full p-2 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100"
     >
       <MdArrowForwardIos
         size={30}
@@ -25,7 +25,7 @@ const PrevArrow = ({ onClick }) => {
   return (
     <div
       onClick={onClick}
-      className="absolute left-4 top-1/2 z-10 -translate-y-1/2 transform cursor-pointer rounded-full p-2 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+      className="absolute left-2 top-1/2 z-10 -translate-y-1/2 transform cursor-pointer rounded-full p-2 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100"
     >
       <MdArrowBackIos
         style={{ filter: 'drop-shadow(rgba(0, 0, 0, 0.3) -2px 0px 2px)' }}

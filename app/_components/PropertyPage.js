@@ -1,14 +1,24 @@
 'use client';
 
-import Image from 'next/image';
-import { convertNumber, formatPrice } from '../_lib/helpers';
 import { Button } from '@/components/ui/button';
+import Image from 'next/image';
+import { BiBuildingHouse } from 'react-icons/bi';
+import { IoHammerOutline } from 'react-icons/io5';
+import { LiaRulerCombinedSolid } from 'react-icons/lia';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
+import { TbHomeDollar } from 'react-icons/tb';
+
+import {
+  capitalize,
+  convertNumber,
+  formatNumber,
+  formatPrice,
+  pricePerSqm,
+} from '../_lib/helpers';
 
 export default function PropertyPage({ property }) {
   const firstImage = property.images[0];
-
   return (
     <div className="flex w-full flex-col gap-5 px-5">
       <div className="block md:hidden">
@@ -54,33 +64,53 @@ export default function PropertyPage({ property }) {
 
       <div className="flex w-full gap-5">
         <div className="flex w-[70%] flex-col gap-5">
-          <div className="flex justify-between border-b border-solid border-[#D1D1D5] pb-5">
-            <div className="flex flex-col">
-              <span className="text-3xl font-bold text-gray-800">
-                {formatPrice(property.price)}
-              </span>
-              <div>
-                <h1 className="text-xl font-light leading-8">
-                  {property.address}, {property.city}
-                </h1>
+          <div className="flex flex-col gap-5 border-b border-solid border-[#D1D1D5] pb-5">
+            <div className="flex w-full justify-between">
+              <div className="flex flex-col">
+                <span className="text-3xl font-bold text-gray-800">
+                  {formatPrice(property.price)}
+                </span>
+                <div>
+                  <h1 className="text-xl font-light leading-8">
+                    {property.address}, {property.city}
+                  </h1>
+                </div>
+              </div>
+              <div className="flex items-start gap-4 text-xl font-normal leading-8 text-gray-800">
+                <div className="flex flex-col items-start justify-center">
+                  <span className="text-3xl font-bold">
+                    {convertNumber(property.bedrooms)}
+                  </span>
+                  beds
+                </div>
+                <div className="flex flex-col items-start justify-center">
+                  <span className="text-3xl font-bold">
+                    {convertNumber(property.bathrooms)}
+                  </span>
+                  baths
+                </div>
+                <div className="flex flex-col items-start justify-center">
+                  <span className="text-3xl font-bold">{property.sqmeter}</span>
+                  sq m
+                </div>
               </div>
             </div>
-            <div className="flex items-start gap-4 text-xl font-normal leading-8 text-gray-800">
-              <div className="flex flex-col items-start justify-center">
-                <span className="text-3xl font-bold">
-                  {convertNumber(property.bedrooms)}
-                </span>
-                beds
+            <div className="grid h-fit w-full grid-cols-2 grid-rows-2 gap-3 text-gray-800">
+              <div className="flex items-center gap-2 rounded-md bg-gray-100 p-3">
+                <BiBuildingHouse size={20} />
+                <span>{capitalize(property.type)}</span>
               </div>
-              <div className="flex flex-col items-start justify-center">
-                <span className="text-3xl font-bold">
-                  {convertNumber(property.bathrooms)}
-                </span>
-                baths
+              <div className="flex items-center gap-2 rounded-md bg-gray-100 p-3">
+                <IoHammerOutline size={20} />{' '}
+                <span>Built in {property.builtYear} </span>
               </div>
-              <div className="flex flex-col items-start justify-center">
-                <span className="text-3xl font-bold">{property.sqmeter}</span>
-                sq m
+              <div className="flex items-center gap-2 rounded-md bg-gray-100 p-3">
+                <LiaRulerCombinedSolid size={20} />{' '}
+                <span>{pricePerSqm(property.price, property.sqmeter)}/sqm</span>
+              </div>
+              <div className="flex items-center gap-2 rounded-md bg-gray-100 p-3">
+                <TbHomeDollar size={20} />{' '}
+                <span>${formatNumber(property.HOA)}/mo HOA</span>
               </div>
             </div>
           </div>

@@ -66,3 +66,11 @@ export function formatNumber(num) {
   }
   return num.toString();
 }
+
+export function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+}
+
+export function pricePerSqm(price, sqm) {
+  return `${formatPrice(price / sqm)}`;
+}

@@ -61,6 +61,12 @@ model Property {
   agent     Agent?   @relation(fields: [agentId], references: [id])
   agentId   String?
   soldDate  String?
+  about     String?
+  builtYear Int?
+  HOA       Float?
+  createdAt DateTime @default(now())
+  features  String[]
+  type      String?
 
   @@map("properties")
 }
