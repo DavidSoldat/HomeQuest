@@ -51,6 +51,8 @@ export const editAgentSchema = z
     path: ['rangeLower'],
   });
 
+const currentYear = new Date().getFullYear();
+
 export const addPropertySchema = z.object({
   city: z
     .string()
@@ -75,6 +77,25 @@ export const addPropertySchema = z.object({
   images: z.string().array(),
   agentId: z.string(),
   soldDate: z.string().optional(),
+  builtYear: z.preprocess(
+    (val) => Number(val),
+    z
+      .number()
+      .min(1900, { message: 'Year must be at least 1900' })
+      .max(currentYear, {
+        message: `Year must not be in the future. Current year is ${currentYear}`,
+      })
+      .refine((year) => year < currentYear, {
+        message: 'Year must be in the past',
+      }),
+  ),
+  HOA: z.preprocess(
+    (val) => Number(val),
+    z.number({ message: 'Input Sqare meters' }),
+  ),
+  type: z.string({ message: 'Select type of the property' }),
+  features: z.array(z.string()),
+  about: z.string({ message: 'Give us some info about this property' }),
 });
 
 export const editPropertySchema = z.object({
@@ -100,6 +121,25 @@ export const editPropertySchema = z.object({
   ),
   agentId: z.string(),
   soldDate: z.string().optional(),
+  builtYear: z.preprocess(
+    (val) => Number(val),
+    z
+      .number()
+      .min(1900, { message: 'Year must be at least 1900' })
+      .max(currentYear, {
+        message: `Year must not be in the future. Current year is ${currentYear}`,
+      })
+      .refine((year) => year < currentYear, {
+        message: 'Year must be in the past',
+      }),
+  ),
+  HOA: z.preprocess(
+    (val) => Number(val),
+    z.number({ message: 'Input Sqare meters' }),
+  ),
+  type: z.string({ message: 'Select type of the property' }),
+  features: z.array(z.string()),
+  about: z.string({ message: 'Give us some info about this property' }),
 });
 
 export const ContactFormSchema = z.object({

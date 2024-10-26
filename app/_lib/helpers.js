@@ -41,21 +41,24 @@ export function convertNumber(word) {
   return numberMap[word];
 }
 
-export function calculateDays(date) {
+export function calculateDaysOrHours(date) {
   const targetDate = new Date(date);
-
   const today = new Date();
 
   targetDate.setHours(0, 0, 0, 0);
   today.setHours(0, 0, 0, 0);
 
   const timeDifference = targetDate - today;
+  const dayDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 
-  const daysDifference = Math.abs(
-    Math.ceil(timeDifference / (1000 * 60 * 60 * 24)),
-  );
-
-  return daysDifference;
+  if (dayDifference >= 1) {
+    return `${dayDifference} days`;
+  } else {
+    const hourDifference = Math.abs(
+      Math.ceil(timeDifference / (1000 * 60 * 60)),
+    );
+    return `${hourDifference} hours`;
+  }
 }
 
 export function formatNumber(num) {
@@ -73,4 +76,15 @@ export function capitalize(string) {
 
 export function pricePerSqm(price, sqm) {
   return `${formatPrice(price / sqm)}`;
+}
+export const featuresList = [
+  { value: 'gym', label: 'Gym' },
+  { value: 'balcony', label: 'Balcony' },
+  { value: 'ac', label: 'A/C' },
+  { value: 'fireplace', label: 'Fireplace' },
+];
+
+export function getLabelByValue(value) {
+  const feature = featuresList.find((item) => item.value === value);
+  return feature.label;
 }

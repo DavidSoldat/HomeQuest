@@ -171,6 +171,11 @@ export async function addProperty(values) {
     soldDate,
     lat,
     lng,
+    about,
+    builtYear,
+    HOA,
+    features,
+    type,
   } = values;
 
   try {
@@ -189,6 +194,11 @@ export async function addProperty(values) {
         soldDate,
         lat,
         lng,
+        about,
+        builtYear,
+        HOA,
+        features,
+        type,
       },
     });
     console.log('Success');
@@ -296,6 +306,11 @@ export async function editProperty(values, propertyId) {
     price,
     agentId,
     soldDate,
+    HOA,
+    type,
+    builtYear,
+    features,
+    about,
   } = values;
 
   try {
@@ -312,6 +327,11 @@ export async function editProperty(values, propertyId) {
         price,
         agentId,
         soldDate,
+        HOA,
+        type,
+        builtYear,
+        features,
+        about,
       },
     });
     revalidatePath('/admin/managelistings');

@@ -22,7 +22,7 @@ export default async function Buy() {
       <div className="mb-3 pl-1 pr-4 lg:hidden">
         <SearchInput />
       </div>
-      <div className="grid w-full grid-cols-1 gap-4 overflow-scroll px-4 sm:grid-cols-2 md:grid-cols-3 lg:hidden">
+      <div className="grid w-full grid-cols-1 gap-4 overflow-y-scroll px-4 pb-2 sm:grid-cols-2 md:grid-cols-3 lg:hidden">
         {properties.map((property, index) => (
           <PropertyCard property={property} key={index} />
         ))}
