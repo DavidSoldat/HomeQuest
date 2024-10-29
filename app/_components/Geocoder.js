@@ -1,7 +1,4 @@
 'use client';
-import * as L from 'leaflet';
-import 'leaflet-control-geocoder/dist/Control.Geocoder.css';
-import 'leaflet-control-geocoder/dist/Control.Geocoder.js';
 import 'leaflet/dist/leaflet.css';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
@@ -14,30 +11,52 @@ export default function LeafletControlGeocoder({
   const map = useMap();
 
   useEffect(() => {
-    const geocoder = L.Control.Geocoder.nominatim();
+    async function geocode(query) {
+      const bbox = '15.75,42.5,19.6,45.3';
+      const url = `https://photon.komoot.io/api/?q=${query}&bbox=${bbox}&limit=5`;
 
-    if (submittedValue) {
-      geocoder.geocode(submittedValue, (results) => {
-        if (results.length > 0) {
-          const result = results[0];
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
 
-          const latlng = result.center;
+        console.log('Geocode Results:', data.features);
+
+        const filteredResults = data.features.filter((result) =>
+          ['city', 'town', 'neighbourhood', 'suburb'].includes(
+            result.properties.type,
+          ),
+        );
+
+        const result =
+          filteredResults.length > 0 ? filteredResults[0] : data.features[0];
+
+        if (result) {
+          const latlng = [
+            result.geometry.coordinates[1],
+            result.geometry.coordinates[0],
+          ];
           setPosition(latlng);
 
           if (result.bbox) {
             const bounds = [
-              [result.bbox.getSouthWest().lat, result.bbox.getSouthWest().lng],
-              [result.bbox.getNorthEast().lat, result.bbox.getNorthEast().lng],
+              [result.bbox[1], result.bbox[0]], // SW
+              [result.bbox[3], result.bbox[2]], // NE
             ];
-
             map.fitBounds(bounds);
           } else {
-            map.setView(latlng, 13);
+            map.setView(latlng, 15);
           }
         } else {
-          toast('⛔ Location not found. Try again');
+          toast('⛔ Location not found or it does not meet the criteria.');
         }
-      });
+      } catch (error) {
+        console.error('Geocoding error:', error);
+        toast('⛔ An error occurred while geocoding. Please try again.');
+      }
+    }
+
+    if (submittedValue) {
+      geocode(submittedValue);
     }
   }, [map, setPosition, submittedValue]);
 

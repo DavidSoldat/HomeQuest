@@ -22,7 +22,6 @@ import { getAgent } from '../_lib/actions';
 
 export default function PropertyPage({ property, agent }) {
   const firstImage = property.images[0];
-  console.log(agent);
   return (
     <div className="flex w-full flex-col gap-5 px-2 md:px-5">
       <div className="block md:hidden">
@@ -43,7 +42,7 @@ export default function PropertyPage({ property, agent }) {
         </Swiper>
       </div>
 
-      <div className="hidden h-[440px] grid-cols-4 grid-rows-2 gap-2 overflow-hidden rounded-lg md:grid">
+      <div className="hidden h-[440px] grid-cols-4 grid-rows-2 gap-2 overflow-hidden rounded-xl md:grid">
         <div className="relative col-span-2 row-span-2 h-full">
           <Image
             alt="Property image"
@@ -162,7 +161,7 @@ export default function PropertyPage({ property, agent }) {
               <p className="text-xs font-light">as early as Monday!</p>
             </button>
             <Button className="w-full border border-blue-600 px-4 py-2 text-base font-bold text-blue-600 hover:border-blue-700 hover:text-blue-700">
-              Message
+              Contact an agent
             </Button>
           </div>
         </div>

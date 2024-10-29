@@ -1,6 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { calculateDays, convertNumber, formatPrice } from '../_lib/helpers';
+import {
+  calculateDays,
+  calculateDaysOrHours,
+  convertNumber,
+  formatPrice,
+} from '../_lib/helpers';
 
 export default function SoldPropertyCard({ property }) {
   const {
@@ -39,8 +44,8 @@ export default function SoldPropertyCard({ property }) {
           </p>
           <div className="mt-1 flex items-center gap-1 text-sm">
             <span className="text-yellow-600">●</span>
-            <span className="font-bold">Sold</span> {calculateDays(soldDate)}{' '}
-            days ago
+            <span className="font-bold">Sold</span>{' '}
+            {calculateDaysOrHours(soldDate)} ago
           </div>
         </div>
       </div>

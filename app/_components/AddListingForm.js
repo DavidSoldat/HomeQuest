@@ -74,7 +74,6 @@ export default function AddListingForm({ agents }) {
     };
 
     try {
-      console.log(newValues);
       await addPropertySchema.parseAsync(newValues);
       await addProperty(newValues);
       toast.success('New listing added');
@@ -117,9 +116,7 @@ export default function AddListingForm({ agents }) {
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(handleSubmit, (e) => {
-          console.log(e);
-        })}
+        onSubmit={form.handleSubmit(handleSubmit)}
         className="space-y-8 py-4"
       >
         <div className="flex w-full space-x-8">

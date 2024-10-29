@@ -41,7 +41,6 @@ export default async function Page({ params }) {
   const agent = await getAgent(params.agentId);
   const properties = await getAgentsProperties(agent.id);
 
-  console.log(properties);
   return (
     <div className="h-full w-full px-4 md:max-w-6xl lg:mx-auto">
       <Breadcrumb className="my-3 text-gray-600">

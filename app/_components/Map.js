@@ -72,7 +72,7 @@ export default function MyMap({ properties }) {
 
       <MapContainer
         center={position}
-        zoom={13}
+        zoom={14}
         scrollWheelZoom={true}
         className="z-0 h-full w-full"
         whenCreated={(map) => {
@@ -80,8 +80,9 @@ export default function MyMap({ properties }) {
         }}
       >
         <TileLayer
-          attribution="Google Maps"
-          url="https://www.google.cn/maps/vt?lyrs=m@189&gl=cn&x={x}&y={y}&z={z}"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+          // url="https://www.google.cn/maps/vt?lyrs=m@189&gl=cn&x={x}&y={y}&z={z}"
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
         <LeafletControlGeocoder

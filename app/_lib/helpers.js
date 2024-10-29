@@ -42,21 +42,20 @@ export function convertNumber(word) {
 }
 
 export function calculateDaysOrHours(date) {
+  if (!date) return '-- days';
+
   const targetDate = new Date(date);
   const today = new Date();
 
-  targetDate.setHours(0, 0, 0, 0);
-  today.setHours(0, 0, 0, 0);
+  const timeDifference = Math.abs(targetDate - today);
 
-  const timeDifference = targetDate - today;
-  const dayDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+  const hourDifference = Math.floor(timeDifference / (1000 * 60 * 60));
 
-  if (dayDifference >= 1) {
+  if (hourDifference >= 24) {
+    const dayDifference = Math.floor(hourDifference / 24);
+    if (dayDifference >= 365) return 'Over a year ';
     return `${dayDifference} days`;
   } else {
-    const hourDifference = Math.abs(
-      Math.ceil(timeDifference / (1000 * 60 * 60)),
-    );
     return `${hourDifference} hours`;
   }
 }
