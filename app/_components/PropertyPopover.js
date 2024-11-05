@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { convertNumber, formatPrice } from '../_lib/helpers';
+import { capitalize, convertNumber, formatPrice } from '../_lib/helpers';
 
 export default function PropertyPopover({ property }) {
   return (
@@ -30,7 +30,7 @@ export default function PropertyPopover({ property }) {
                 {convertNumber(property.bathrooms)}
               </span>{' '}
               ba | <span className="font-semibold">{property.sqmeter}</span> sqm
-              - Condo for sale
+              - {capitalize(property.propertyType)} for sale
             </p>
             <div className="flex items-center gap-1 text-sm leading-6 text-[#2A2A33]">
               <span>

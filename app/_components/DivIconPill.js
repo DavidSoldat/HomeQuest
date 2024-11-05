@@ -1,6 +1,8 @@
-export default function DivIconPill(price) {
+export default function DivIconPill(price, type) {
   return (
-    <button className="property-pill">
+    <button
+      className={type === 'sale' ? 'property-pill' : 'property-pill-rent'}
+    >
       <div className="pill-text">{price}</div>
     </button>
   );

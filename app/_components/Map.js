@@ -12,7 +12,7 @@ import LeafletControlGeocoder from './Geocoder';
 import PropertyPopover from './PropertyPopover';
 import SearchInput from './SearchInput';
 
-export default function MyMap({ properties }) {
+export default function MyMap({ properties, type }) {
   const [position, setPosition] = useState([44.7716, 17.1988]);
   const [submittedValue, setSubmittedValue] = useState('');
   const [selectedMarker, setSelectedMarker] = useState(null);
@@ -20,10 +20,10 @@ export default function MyMap({ properties }) {
   const [isAbove, setIsAbove] = useState(true);
   const popoverRef = useRef(null);
 
-  const createPriceMarker = (price, propertyId) => {
+  const createPriceMarker = (price, listingType) => {
     return L.divIcon({
       className: 'custom-marker',
-      html: renderToString(DivIconPill(price, propertyId)),
+      html: renderToString(DivIconPill(price, listingType)),
       iconSize: [45, 19],
       iconAnchor: [22.5, 19],
     });
@@ -93,7 +93,10 @@ export default function MyMap({ properties }) {
           <Marker
             key={property.id}
             position={[property.lat, property.lng]}
-            icon={createPriceMarker(formatPrice(property.price), property.id)}
+            icon={createPriceMarker(
+              formatPrice(property.price),
+              property.listingType,
+            )}
             eventHandlers={{
               click: (e) => handleMarkerClick(property, e.target._map),
             }}

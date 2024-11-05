@@ -187,6 +187,27 @@ input[type='search'].dark::-webkit-search-cancel-button {
   position: relative;
 }
 
+.property-pill-rent {
+  height: 18px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  color: white;
+  background-color: #6d28d9;
+  font-size: 11px;
+  text-align: center;
+  pointer-events: auto;
+  padding: 1px 7px;
+  white-space: nowrap;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  width: fit-content;
+  position: relative;
+}
+
 .pill-text {
   display: inline-block;
   overflow: hidden;

@@ -22,6 +22,7 @@ import ContactPropertyForm from './ContactPropertyForm';
 
 export default function PropertyPage({ property, agent }) {
   const firstImage = property.images[0];
+
   return (
     <div className="flex w-full flex-col gap-5 px-2 md:px-5">
       <div className="block md:hidden">

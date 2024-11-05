@@ -1,26 +1,38 @@
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import NextAuth from 'next-auth';
-import GitHub from 'next-auth/providers/github';
-import Google from 'next-auth/providers/google';
-import Sendgrid from 'next-auth/providers/sendgrid';
+import GitHubProvider from 'next-auth/providers/github';
+import GoogleProvider from 'next-auth/providers/google';
+import SendgridProvider from 'next-auth/providers/sendgrid';
 import prisma from './app/_lib/prisma';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  trustHost: true,
+  trustHost: process.env.NODE_ENV === 'development',
   theme: {
     logo: '/logo.png',
   },
   adapter: PrismaAdapter(prisma),
+  secret: process.env.AUTH_SECRET,
   callbacks: {
     session({ session, user }) {
-      session.user.role = user.role;
+      if (user && user.role) {
+        session.user.role = user.role;
+      }
       return session;
     },
   },
   providers: [
-    Google,
-    GitHub,
-    Sendgrid({
+    GoogleProvider({
+      clientId: process.env.AUTH_GOOGLE_ID,
+      clientSecret: process.env.AUTH_GOOGLE_SECRET,
+      authorization: {
+        params: { code_challenge_method: 'S256' },
+      },
+    }),
+    GitHubProvider({
+      clientId: process.env.AUTH_GITHUB_ID,
+      clientSecret: process.env.AUTH_GITHUB_SECRET,
+    }),
+    SendgridProvider({
       from: 'homequestrealestates@gmail.com',
     }),
   ],
