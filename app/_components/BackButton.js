@@ -6,8 +6,15 @@ import { useRouter } from 'next/navigation';
 
 export default function BackButton() {
   const router = useRouter();
+
   const goBack = () => {
-    router.back();
+    const referrer = document.referrer;
+
+    if (referrer.includes('/buy') || referrer.includes('/rent')) {
+      router.back();
+    } else {
+      router.push('/buy');
+    }
   };
 
   return (

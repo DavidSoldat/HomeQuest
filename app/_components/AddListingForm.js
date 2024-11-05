@@ -82,6 +82,7 @@ export default function AddListingForm({ agents }) {
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
       }
+      setSelectedFeatures([]);
     } catch (error) {
       console.error('Validation errors:', error);
       if (error instanceof z.ZodError) {
@@ -107,7 +108,8 @@ export default function AddListingForm({ agents }) {
       soldDate: '',
       builtYear: '',
       HOA: '',
-      type: '',
+      propertyType: '',
+      listingType: '',
       features: [],
       about: '',
     },
@@ -413,14 +415,11 @@ export default function AddListingForm({ agents }) {
         <div className="flex w-full space-x-8">
           <FormField
             control={form.control}
-            name="type"
+            name="propertyType"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Type</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
+                <FormLabel>Property type</FormLabel>
+                <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Property" />
@@ -453,12 +452,43 @@ export default function AddListingForm({ agents }) {
                 <MultiSelect
                   options={featuresList}
                   onValueChange={setSelectedFeatures}
-                  defaultValue={selectedFeatures}
+                  value={selectedFeatures}
                   placeholder="Select features"
                   variant="inverted"
                   animation={2}
                   maxCount={3}
                 />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="listingType"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Listing type</FormLabel>
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Sale/Rent" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent className="bg-white">
+                    <SelectItem
+                      className="cursor-pointer hover:bg-gray-100"
+                      value="sale"
+                    >
+                      Sale
+                    </SelectItem>
+                    <SelectItem
+                      className="cursor-pointer hover:bg-gray-100"
+                      value="rent"
+                    >
+                      Rent
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
                 <FormMessage />
               </FormItem>
             )}

@@ -159,46 +159,13 @@ export async function editAgent(values, agentId) {
 }
 
 export async function addProperty(values) {
-  const {
-    address,
-    city,
-    bedrooms,
-    bathrooms,
-    sqmeter,
-    price,
-    images,
-    agentId,
-    soldDate,
-    lat,
-    lng,
-    about,
-    builtYear,
-    HOA,
-    features,
-    type,
-  } = values;
-
   try {
     await prisma.property.create({
       data: {
-        address,
-        bedrooms,
-        bathrooms,
-        sqmeter,
-        city,
-        price,
-        images,
+        ...values,
         agent: {
           connect: { id: agentId },
         },
-        soldDate,
-        lat,
-        lng,
-        about,
-        builtYear,
-        HOA,
-        features,
-        type,
       },
     });
     console.log('Success');
@@ -208,9 +175,32 @@ export async function addProperty(values) {
   }
 }
 
-export async function getProperties() {
+export async function getPropertiesSale() {
+  try {
+    return await prisma.property.findMany({
+      where: {
+        listingType: 'sale',
+      },
+    });
+  } catch (error) {
+    throw new Error('Error fetching properties: ' + error.message);
+  }
+}
+export async function getAllProperties() {
   try {
     return await prisma.property.findMany();
+  } catch (error) {
+    throw new Error('Error fetching properties: ' + error.message);
+  }
+}
+
+export async function getPropertiesRent() {
+  try {
+    return await prisma.property.findMany({
+      where: {
+        listingType: 'rent',
+      },
+    });
   } catch (error) {
     throw new Error('Error fetching properties: ' + error.message);
   }
@@ -297,41 +287,13 @@ export async function deleteProperty(propertyId) {
 }
 
 export async function editProperty(values, propertyId) {
-  const {
-    address,
-    city,
-    bedrooms,
-    bathrooms,
-    sqmeter,
-    price,
-    agentId,
-    soldDate,
-    HOA,
-    type,
-    builtYear,
-    features,
-    about,
-  } = values;
-
   try {
     await prisma.property.update({
       where: {
         id: propertyId,
       },
       data: {
-        address,
-        city,
-        bedrooms,
-        bathrooms,
-        sqmeter,
-        price,
-        agentId,
-        soldDate,
-        HOA,
-        type,
-        builtYear,
-        features,
-        about,
+        ...values,
       },
     });
     revalidatePath('/admin/managelistings');

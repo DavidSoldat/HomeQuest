@@ -81,7 +81,6 @@ export default function MyMap({ properties }) {
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-          // url="https://www.google.cn/maps/vt?lyrs=m@189&gl=cn&x={x}&y={y}&z={z}"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 

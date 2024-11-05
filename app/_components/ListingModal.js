@@ -3,16 +3,15 @@
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogOverlay,
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { useRouter } from 'next/navigation';
 import { MdArrowBackIosNew, MdIosShare } from 'react-icons/md';
 import Logo from './Logo';
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 export default function ListingModal({ children }) {
   const router = useRouter();
@@ -30,7 +29,7 @@ export default function ListingModal({ children }) {
           <DialogTitle>
             <VisuallyHidden>Property</VisuallyHidden>
           </DialogTitle>
-          <div className="sticky top-0 z-10 flex h-fit w-full items-center justify-between bg-white py-2 md:p-4">
+          <div className="sticky top-[-1px] z-10 flex h-fit w-full items-center justify-between bg-white py-2 md:p-4">
             <DialogTrigger asChild>
               <Button className="flex gap-3 text-sm font-normal leading-6 text-gray-600 hover:underline">
                 <MdArrowBackIosNew size={25} /> Back to search

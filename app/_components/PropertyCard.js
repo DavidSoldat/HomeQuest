@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import 'swiper/swiper-bundle.css';
 import { getAgent } from '../_lib/actions';
-import { convertNumber, formatPrice } from '../_lib/helpers';
+import { capitalize, convertNumber, formatPrice } from '../_lib/helpers';
 import CardActions from './CardActions';
 import ClientCarousel from './ImageSwiper';
 
@@ -15,12 +15,17 @@ export default async function PropertyCard({ property }) {
     address,
     city,
     agentId,
+    propertyType,
+    listingType,
   } = property;
 
   const { name: agentName } = await getAgent(agentId);
 
   return (
-    <Link href={`/buy/${property.id}`} className="block">
+    <Link
+      href={`/${listingType === 'sale' ? 'buy' : 'rent'}/${property.id}`}
+      className="block"
+    >
       <div className="agentProfile flex min-w-0 flex-col overflow-hidden rounded-md border">
         <div className="relative flex-shrink-0">
           <ClientCarousel images={images} />
@@ -37,8 +42,8 @@ export default async function PropertyCard({ property }) {
             </span>{' '}
             bds |{' '}
             <span className="font-semibold">{convertNumber(bathrooms)}</span> ba
-            | <span className="font-semibold">{sqmeter}</span> sqm - Condo for
-            sale
+            | <span className="font-semibold">{sqmeter}</span> sqm -{' '}
+            {capitalize(propertyType)} for sale
           </p>
           <div className="flex items-center gap-1 text-sm leading-6 text-[#2A2A33]">
             <span>

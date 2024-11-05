@@ -1,12 +1,8 @@
 'use client';
-import { PropagateLoader } from 'react-spinners';
+import Loader from '../_components/Loader';
 
 function loading() {
-  return (
-    <div className='flex w-full  justify-center items-center h-screen'>
-      <PropagateLoader color='#1d4ed8' size={30} />
-    </div>
-  );
+  return <Loader />;
 }
 
 export default loading;

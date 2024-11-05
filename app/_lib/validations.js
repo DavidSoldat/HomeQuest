@@ -93,7 +93,8 @@ export const addPropertySchema = z.object({
     (val) => Number(val),
     z.number({ message: 'Input Sqare meters' }),
   ),
-  type: z.string({ message: 'Select type of the property' }),
+  propertyType: z.string({ message: 'Select type of the property' }),
+  listingType: z.string({ message: 'Select type of the listing' }),
   features: z.array(z.string()),
   about: z.string({ message: 'Give us some info about this property' }),
 });
@@ -137,7 +138,8 @@ export const editPropertySchema = z.object({
     (val) => Number(val),
     z.number({ message: 'Input Sqare meters' }),
   ),
-  type: z.string({ message: 'Select type of the property' }),
+  propertyType: z.string({ message: 'Select type of the property' }),
+  listingType: z.string({ message: 'Select type of the listing' }),
   features: z.array(z.string()),
   about: z.string({ message: 'Give us some info about this property' }),
 });
@@ -148,4 +150,12 @@ export const ContactFormSchema = z.object({
     .min(3, { message: 'Name must be at lest 3 characters long' }),
   email: z.string().email({ message: 'Input valid email' }),
   message: z.string().optional(),
+});
+export const ContactPropertySchema = z.object({
+  name: z
+    .string()
+    .min(3, { message: 'Name must be at lest 3 characters long' }),
+  email: z.string().email({ message: 'Input valid email' }),
+  message: z.string().optional(),
+  financingInfo: z.boolean().default(true),
 });

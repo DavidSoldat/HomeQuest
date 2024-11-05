@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 import getSession from '../../_lib/getSession';
-import { getAgents, getProperties } from '../../_lib/actions';
+import { getAgents, getAllProperties, getProperties } from '../../_lib/actions';
 
 export const metadata = {
   title: 'Admin Dashboard',
@@ -11,7 +11,7 @@ async function AdminDashboard() {
   const user = session?.user;
   if (!user) redirect('/signin');
   const agents = await getAgents();
-  const properties = await getProperties();
+  const properties = await getAllProperties();
 
   if (user.role !== 'admin') {
     return (

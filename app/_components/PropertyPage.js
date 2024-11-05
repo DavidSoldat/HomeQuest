@@ -18,7 +18,7 @@ import {
   getLabelByValue,
   pricePerSqm,
 } from '../_lib/helpers';
-import { getAgent } from '../_lib/actions';
+import ContactPropertyForm from './ContactPropertyForm';
 
 export default function PropertyPage({ property, agent }) {
   const firstImage = property.images[0];
@@ -65,7 +65,7 @@ export default function PropertyPage({ property, agent }) {
         ))}
       </div>
 
-      <div className="flex w-full flex-col gap-5 md:flex-row">
+      <div className="flex w-full flex-col gap-5 pb-5 md:flex-row">
         <div className="flex flex-col gap-5 md:w-[70%]">
           <div className="flex flex-col gap-5 border-b border-solid border-[#D1D1D5] pb-5">
             <div className="flex w-full justify-between">
@@ -101,7 +101,7 @@ export default function PropertyPage({ property, agent }) {
             <div className="grid h-fit w-full grid-cols-2 grid-rows-2 gap-3 text-gray-800">
               <div className="flex items-center gap-2 rounded-md bg-gray-100 p-3">
                 <BiBuildingHouse size={20} />
-                <span>{capitalize(property.type)}</span>
+                <span>{capitalize(property.propertyType)}</span>
               </div>
               <div className="flex items-center gap-2 rounded-md bg-gray-100 p-3">
                 <IoHammerOutline size={20} />{' '}
@@ -125,7 +125,7 @@ export default function PropertyPage({ property, agent }) {
               <p>{property.about}</p>
             </div>
           </div>
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-5 border-b border-solid border-[#D1D1D5] pb-5">
             <h1 className="text-2xl font-bold text-gray-800">Features</h1>
             <div className="flex flex-wrap gap-2">
               {property.features.map((feature, i) => (
@@ -152,6 +152,18 @@ export default function PropertyPage({ property, agent }) {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="flex flex-col gap-5 border-b border-solid border-[#D1D1D5] pb-5">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-800">
+                Contact a Buyer&apos;s Agent
+              </h1>
+              <span>
+                Connect with a local buyer&apos;s agent who advertises with Home
+                Quest.
+              </span>
+            </div>
+            <ContactPropertyForm property={property} />
           </div>
         </div>
         <div className="flex h-fit md:w-1/3">

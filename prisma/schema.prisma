@@ -48,25 +48,26 @@ model Agent {
 }
 
 model Property {
-  id        String   @id @default(cuid())
-  address   String
-  bedrooms  String
-  bathrooms String
-  sqmeter   Float
-  city      String
-  lat       String?
-  lng       String?
-  price     Float
-  images    String[]
-  agent     Agent?   @relation(fields: [agentId], references: [id])
-  agentId   String?
-  soldDate  String?
-  about     String?
-  builtYear Int?
-  HOA       Float?
-  createdAt DateTime @default(now())
-  features  String[]
-  type      String?
+  id           String   @id @default(cuid())
+  address      String
+  bedrooms     String
+  bathrooms    String
+  sqmeter      Float
+  city         String
+  lat          String?
+  lng          String?
+  price        Float
+  images       String[]
+  agent        Agent?   @relation(fields: [agentId], references: [id])
+  agentId      String?
+  soldDate     String?
+  about        String?
+  builtYear    Int?
+  HOA          Float?
+  createdAt    DateTime @default(now())
+  features     String[]
+  propertyType String?
+  listingType  String?
 
   @@map("properties")
 }
