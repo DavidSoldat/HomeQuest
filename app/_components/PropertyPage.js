@@ -22,7 +22,7 @@ import ContactPropertyForm from './ContactPropertyForm';
 
 export default function PropertyPage({ property, agent }) {
   const firstImage = property.images[0];
-
+  console.log(property);
   return (
     <div className="flex w-full flex-col gap-5 px-2 md:px-5">
       <div className="block md:hidden">
@@ -72,7 +72,9 @@ export default function PropertyPage({ property, agent }) {
             <div className="flex w-full justify-between">
               <div className="flex flex-col">
                 <span className="text-3xl font-bold text-gray-800">
-                  {formatPrice(property.price)}
+                  {`${formatPrice(property.price)}${
+                    property.listingType === 'rent' ? '/mo' : ''
+                  }`}
                 </span>
                 <div>
                   <h1 className="text-xl font-light leading-8">

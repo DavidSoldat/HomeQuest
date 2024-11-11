@@ -33,7 +33,9 @@ export default async function PropertyCard({ property }) {
 
         <div className="flex flex-1 flex-col justify-between p-2">
           <div className="mb-2 line-clamp-1 flex justify-between text-xl/[24px] font-bold">
-            <p className="">{formatPrice(price)}</p>
+            <p className="">{`${formatPrice(price)}${
+              listingType === 'rent' ? '/mo' : ''
+            }`}</p>
             <CardActions />
           </div>
           <p className="text-sm text-gray-600">
