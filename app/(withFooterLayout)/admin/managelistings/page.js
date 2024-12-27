@@ -1,5 +1,9 @@
 import ListActions from '@/app/_components/ListActions';
-import { deleteProperty, getAgents, getProperties } from '@/app/_lib/actions';
+import {
+  deleteProperty,
+  getAgents,
+  getAllProperties,
+} from '@/app/_lib/actions';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -20,7 +24,7 @@ import {
 import Link from 'next/link';
 
 export default async function manageListings() {
-  const properties = await getProperties();
+  const properties = await getAllProperties();
   const agents = await getAgents();
   return (
     <div className="flex w-full flex-col gap-6 px-4 pb-10 pt-6 md:max-w-6xl lg:mx-auto">
@@ -45,20 +49,20 @@ export default async function manageListings() {
           <TableCaption>List of Properties</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead>Id</TableHead>
               <TableHead>City</TableHead>
               <TableHead>Address</TableHead>
+              <TableHead>Type</TableHead>
               <TableHead></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {properties.map((property) => (
               <TableRow key={property.id}>
-                <TableCell>{property.id}</TableCell>
                 <TableCell className="flex items-center gap-2">
                   {property.city}
                 </TableCell>
                 <TableCell>{property.address}</TableCell>
+                <TableCell>{property.listingType}</TableCell>
                 <TableCell>
                   <ListActions
                     item={property}

@@ -24,36 +24,35 @@ export default async function PropertyCard({ property }) {
   return (
     <Link
       href={`/${listingType === 'sale' ? 'buy' : 'rent'}/${property.id}`}
-      className="block"
+      className="block h-full"
     >
-      <div className="agentProfile flex min-w-0 flex-col overflow-hidden rounded-md border">
+      <div className="agentProfile flex h-full flex-col overflow-hidden rounded-md border">
         <div className="relative flex-shrink-0">
           <ClientCarousel images={images} />
         </div>
 
-        <div className="flex flex-1 flex-col justify-between p-2">
-          <div className="mb-2 line-clamp-1 flex justify-between text-xl/[24px] font-bold">
-            <p className="">{`${formatPrice(price)}${
+        <div className="flex flex-1 flex-col justify-between p-4">
+          <div className="mb-2 flex items-center justify-between text-xl font-bold leading-tight">
+            <p className="truncate">{`${formatPrice(price)}${
               listingType === 'rent' ? '/mo' : ''
             }`}</p>
             <CardActions />
           </div>
+
           <p className="text-sm text-gray-600">
-            <span className="text-sm font-semibold">
-              {convertNumber(bedrooms)}
-            </span>{' '}
-            bds |{' '}
-            <span className="font-semibold">{convertNumber(bathrooms)}</span> ba
-            | <span className="font-semibold">{sqmeter}</span> sqm -{' '}
+            <span className="font-semibold">{convertNumber(bedrooms)}</span> bds{' '}
+            | <span className="font-semibold">{convertNumber(bathrooms)}</span>{' '}
+            ba | <span className="font-semibold">{sqmeter}</span> sqm -{' '}
             {capitalize(propertyType)} for sale
           </p>
-          <div className="flex items-center gap-1 text-sm leading-6 text-[#2A2A33]">
-            <span>
+
+          <div className="mt-2 flex items-center gap-1 text-sm text-gray-700">
+            <span className="truncate">
               {address}, {city}
             </span>
           </div>
 
-          <div className="text-[10px] uppercase leading-4 text-gray-600">
+          <div className="mt-2 text-xs uppercase text-gray-500">
             Listing by: {agentName}
           </div>
         </div>

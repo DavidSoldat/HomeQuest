@@ -19,7 +19,7 @@ export default function PropertyPopover({ property }) {
 
           <div className="flex flex-1 flex-col justify-between p-2">
             <div className="mb-2 line-clamp-1 flex justify-between text-xl/[24px] font-bold">
-              <p className="">{formatPrice(property.price)}</p>
+              {`${formatPrice(property.price)}${property.listingType === 'rent' ? '/mo' : ''}`}
             </div>
             <p className="text-sm text-gray-600">
               <span className="text-sm font-semibold">
