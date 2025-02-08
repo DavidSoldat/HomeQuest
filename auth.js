@@ -6,7 +6,7 @@ import SendgridProvider from 'next-auth/providers/sendgrid';
 import prisma from './app/_lib/prisma';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  trustHost: process.env.NODE_ENV === 'development',
+  trustHost: true,
   theme: {
     logo: '/logo.png',
   },
