@@ -35,7 +35,7 @@ export default async function Buy() {
         <SearchInput />
       </div>
 
-      <div className="grid w-full grid-cols-1 items-start gap-4 px-4 pb-2 sm:grid-cols-2 md:grid-cols-3 lg:hidden">
+      <div className="grid w-full grid-cols-1 items-start gap-4 overflow-scroll px-4 pb-2 sm:grid-cols-2 md:grid-cols-3 lg:hidden">
         <Suspense fallback={<Loader />}>
           {properties.length > 0 ? (
             properties.map((property) => (

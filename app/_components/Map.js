@@ -56,11 +56,13 @@ export default function MyMap({ properties, type }) {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (popoverRef.current && !popoverRef.current.contains(event.target)) {
+        console.log('clicking outside');
         setSelectedMarker(null);
       }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };

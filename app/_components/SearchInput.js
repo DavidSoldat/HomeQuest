@@ -21,7 +21,7 @@ export default function SearchInput({ onSearch }) {
   };
 
   return (
-    <div className="flex w-full items-center gap-3">
+    <div className="flex w-full items-center gap-3 max-[440px]:flex-col min-[441px]:flex-row">
       <form
         onSubmit={handleSubmit}
         className="relative w-full items-center pl-3"

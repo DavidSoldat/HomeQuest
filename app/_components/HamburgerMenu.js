@@ -35,9 +35,9 @@ function HamburgerMenu() {
       </div>
 
       <div className={`sm:hidden ${isOpen ? 'block' : 'hidden'}`}>
-        <div className="absolute right-0 top-0 z-10 flex h-dvh w-full flex-col gap-3 bg-gray-50 px-2 py-2 pt-[72px] drop-shadow-lg">
+        <div className="absolute right-0 top-0 z-10 flex h-dvh w-full flex-col gap-3 bg-gray-50 px-4 py-2 pt-[72px] drop-shadow-lg">
           <Link
-            className="border-y pb-2 pt-4 text-lg"
+            className="border-y py-3 text-lg"
             onClick={() => setIsOpen(false)}
             href="/buy"
           >
