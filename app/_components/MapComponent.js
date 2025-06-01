@@ -1,9 +1,14 @@
 'use client';
 import dynamic from 'next/dynamic';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { PropagateLoader } from 'react-spinners';
 
 export default function MapComponent(properties) {
+  useEffect(() => {
+    import('leaflet');
+    import('leaflet-defaulticon-compatibility');
+  }, []);
+
   const Map = useMemo(
     () =>
       dynamic(() => import('@/app/_components/Map'), {

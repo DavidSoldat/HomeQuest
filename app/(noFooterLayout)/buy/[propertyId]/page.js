@@ -14,9 +14,9 @@ export default async function Page({ params: { propertyId } }) {
   const agent = await getAgent(property.agentId);
 
   return (
-    <div className="w-full overflow-y-scroll">
+    <div className="w-full overflow-y-auto">
       <div className="px-4 py-3 md:max-w-6xl lg:mx-auto">
-        <BackButton />
+        <BackButton scroll={false} />
         <PropertyPage property={property} agent={agent} />
       </div>
     </div>

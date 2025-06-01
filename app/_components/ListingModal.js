@@ -21,15 +21,15 @@ export default function ListingModal({ children }) {
 
   return (
     <Dialog open={true} onOpenChange={handleOpenChange}>
-      <DialogOverlay>
+      <DialogOverlay className="overflow-y-auto">
         <DialogContent
           aria-describedby={undefined}
-          className="flex h-screen w-screen flex-col gap-0 overflow-y-scroll !rounded-none bg-white p-0 md:max-w-6xl lg:mx-auto [&>button]:hidden"
+          className="flex h-screen w-screen flex-col gap-0 overflow-y-auto !rounded-none bg-white p-0 md:max-w-6xl lg:mx-auto [&>button]:hidden"
         >
           <DialogTitle>
             <VisuallyHidden>Property</VisuallyHidden>
           </DialogTitle>
-          <div className="sticky top-[-1px] z-10 flex h-fit w-full items-center justify-between bg-white py-2 md:p-4">
+          <div className="sticky top-0 z-10 flex h-fit w-full items-center justify-between bg-white py-2 md:p-4">
             <DialogTrigger asChild>
               <Button className="flex gap-3 text-sm font-normal leading-6 text-gray-600 hover:underline">
                 <MdArrowBackIosNew size={25} /> Back to search

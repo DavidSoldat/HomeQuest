@@ -55,6 +55,7 @@ const ClientCarousel = ({ images }) => {
             alt={`Property image`}
             width={600}
             height={400}
+            priority={i === 0}
             className="h-48 w-full object-cover"
           />
         ))}

@@ -22,7 +22,6 @@ import ContactPropertyForm from './ContactPropertyForm';
 
 export default function PropertyPage({ property, agent }) {
   const firstImage = property.images[0];
-  console.log(property);
   return (
     <div className="flex w-full flex-col gap-5 px-2 md:px-5">
       <div className="block md:hidden">
@@ -34,7 +33,8 @@ export default function PropertyPage({ property, agent }) {
                   alt="Property image"
                   src={image}
                   fill
-                  priority
+                  sizes="(max-width: 768px) 100vw, 0vw"
+                  priority={i === 0}
                   className="object-cover"
                 />
               </div>
@@ -49,17 +49,20 @@ export default function PropertyPage({ property, agent }) {
             alt="Property image"
             src={firstImage}
             fill
+            sizes="(max-width: 768px) 0vw, (max-width: 1024px) 50vw, 33vw"
             priority
             className="object-cover"
           />
         </div>
+
         {property.images.slice(1).map((image, i) => (
           <div className="relative h-full" key={i}>
             <Image
               alt="Property image"
               src={image}
               fill
-              priority
+              sizes="(max-width: 768px) 0vw, (max-width: 1024px) 25vw, 16.66vw"
+              loading="lazy"
               className="object-cover"
             />
           </div>
@@ -71,7 +74,7 @@ export default function PropertyPage({ property, agent }) {
           <div className="flex flex-col gap-5 border-b border-solid border-[#D1D1D5] pb-5">
             <div className="flex w-full justify-between">
               <div className="flex flex-col">
-                <span className="text-3xl font-bold text-gray-800">
+                <span className="text-2xl font-bold text-gray-800 lg:text-3xl">
                   {`${formatPrice(property.price)}${
                     property.listingType === 'rent' ? '/mo' : ''
                   }`}
@@ -84,19 +87,21 @@ export default function PropertyPage({ property, agent }) {
               </div>
               <div className="flex items-start gap-4 text-xl font-normal leading-8 text-gray-800">
                 <div className="flex flex-col items-start justify-center">
-                  <span className="text-3xl font-bold">
+                  <span className="text-2xl font-bold lg:text-3xl">
                     {convertNumber(property.bedrooms)}
                   </span>
                   beds
                 </div>
                 <div className="flex flex-col items-start justify-center">
-                  <span className="text-3xl font-bold">
+                  <span className="text-2xl font-bold lg:text-3xl">
                     {convertNumber(property.bathrooms)}
                   </span>
                   baths
                 </div>
                 <div className="flex flex-col items-start justify-center">
-                  <span className="text-3xl font-bold">{property.sqmeter}</span>
+                  <span className="text-2xl font-bold lg:text-3xl">
+                    {property.sqmeter}
+                  </span>
                   sq m
                 </div>
               </div>
@@ -170,7 +175,7 @@ export default function PropertyPage({ property, agent }) {
           </div>
         </div>
         <div className="flex h-fit md:w-1/3">
-          <div className="contactProperty sticky top-10 flex w-full flex-col items-center justify-center gap-5 p-5">
+          <div className="contactProperty top-10 flex w-full flex-col items-center justify-center gap-5 p-5">
             <button className="flex w-full flex-col items-center justify-center rounded-md border bg-blue-600 px-4 py-2 text-base font-bold text-white hover:bg-blue-700">
               <span>Request a tour</span>
               <p className="text-xs font-light">as early as Monday!</p>

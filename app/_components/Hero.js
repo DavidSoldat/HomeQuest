@@ -31,6 +31,8 @@ async function Hero() {
           src={hero}
           alt="hero image"
           fill
+          loading="lazy"
+          fetchPriority="high"
           className="object-cover md:object-cover"
         />
       </div>

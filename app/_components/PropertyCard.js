@@ -18,7 +18,7 @@ export default async function PropertyCard({ property }) {
     propertyType,
     listingType,
   } = property;
-
+ 
   const { name: agentName } = await getAgent(agentId);
 
   return (

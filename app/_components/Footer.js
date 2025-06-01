@@ -8,7 +8,7 @@ function Footer() {
           <div className="flex flex-col-reverse">
             <span className="text-gray-500">© 2024 David Soldat</span>
             <div className="my-2 flex gap-2">
-              <Link href="https://www.facebook.com/">
+              <Link href="https://www.facebook.com/" aria-label="Facebook">
                 <div className="block p-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +21,7 @@ function Footer() {
                   </svg>
                 </div>
               </Link>
-              <Link href="https://www.instagram.com/">
+              <Link href="https://www.instagram.com/" aria-label="Instagram">
                 <div className="block p-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +34,7 @@ function Footer() {
                   </svg>
                 </div>
               </Link>
-              <Link href="https://twitter.com/">
+              <Link href="https://twitter.com/" aria-label="Twitter">
                 <div className="block p-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +51,7 @@ function Footer() {
                   </svg>
                 </div>
               </Link>
-              <Link href="https://www.youtube.com/">
+              <Link href="https://www.youtube.com/" aria-label="YouTube">
                 <div className="block p-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
